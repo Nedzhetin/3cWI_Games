@@ -1,6 +1,6 @@
 package at.nejo.rocketGame;
 
-import at.nejo.games.firstGame.Shape;
+
 import org.newdawn.slick.*;
 
 public class Rocket implements Figures{

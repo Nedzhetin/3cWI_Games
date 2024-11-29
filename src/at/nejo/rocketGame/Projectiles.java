@@ -14,6 +14,7 @@ public class Projectiles implements Figures {
         this.y = y;
         this.hight = hight;
         this.width = width;
+
     }
 
     @Override

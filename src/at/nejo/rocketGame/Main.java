@@ -13,10 +13,9 @@ public class Main extends BasicGame {
     private Image tmp;
     private Image backgroundImg;
     Timer timer;
-    private AngelCodeFont font;
     private Boss boss;
-    private boolean isBossSpawned = false;
 
+    private boolean isBossSpawned = false;
     private int bossDelay = 2000; // 2 seconds delay
     private int elapsedTime = 0;
 
@@ -30,17 +29,16 @@ public class Main extends BasicGame {
     public void init(GameContainer gameContainer) throws SlickException {
         tmp = new Image("testdata/spaceImg.jpg");
         backgroundImg = tmp.getScaledCopy(2000, 1500);
-        rocket = new Rocket(800, 700);
+        boss = new Boss(580, -1500); // -500 bocause the Img is big
+        rocket = new Rocket(800, 800);
         figures = new ArrayList<>();
         projectiles = new ArrayList<>();
         meteorites = new ArrayList<>();
         timer = new Timer();
-        font = new AngelCodeFont("testdata/hiero.fnt","testdata/hiero.png");
-        boss = new Boss(580, -500); // -200 bocause the Img is big
-
-
 
         figures.add(rocket);
+
+
     }
 
 
@@ -50,6 +48,7 @@ public class Main extends BasicGame {
     public void update(GameContainer gameContainer, int delta) throws SlickException {
 
         elapsedTime += delta; // so das der boss nicht derekt spwaned
+        List<Figures> toRemove = new ArrayList<>();
 
         Meteorites.spawnMeteorit(delta,figures,meteorites);
 
@@ -59,39 +58,49 @@ public class Main extends BasicGame {
         }
 
 
+
         //delete every objekt that goes of the screen
-        figures.removeIf(projectile -> projectile.getY() < -200 || projectile.getY() > gameContainer.getHeight());
+        // -1700 so the boss doesnt die when he is spawned
+        figures.removeIf(projectile -> projectile.getY() < -1700 || projectile.getY() > gameContainer.getHeight());
 
 
-        for (int i = 0; i < meteorites.size(); i++) {
-            Meteorites meteorite = meteorites.get(i);
-            for (int j = 0; j < projectiles.size(); j++) {
-                Projectiles projectile = projectiles.get(j);
 
-                // Check collision
-                if (isColliding(meteorite, projectile)) {
-                    // Remove collided objects
-                    meteorite.setMeteorLifes(meteorite.getMeteorLifes() - 1);
-                    if (meteorite.getMeteorLifes() == 0) {
-                        figures.remove(meteorite);
-                        meteorites.remove(i);
+
+        for (Projectiles projectile : projectiles) {
+            if (isColliding(projectile, boss)) {
+                if (boss.getY() >= 0) { // Ensure boss is on-screen
+                    boss.setBosslifes(boss.getBosslifes() - 1);
+                    System.out.println("It HITT");
+                }
+                toRemove.add(projectile);
+            } else {
+                for (Meteorites meteorite : meteorites) {
+                    if (isColliding(meteorite, projectile)) {
+                        meteorite.setMeteorLifes(meteorite.getMeteorLifes() - 1);
+                        if (meteorite.getMeteorLifes() <= 0) {
+                            toRemove.add(meteorite);
+                        }
+                        toRemove.add(projectile);
+                        break; // Prevent duplicate checks
                     }
-                    figures.remove(projectile);
-                    projectiles.remove(j);
-
-                    // Adjust indices
-                    i--;
-                    j--;
-                    break; // Exit inner loop after removing projectile
                 }
             }
         }
 
+        // Remove all collided object
+        // I had to reacte the toRemove list because sometimes projectiles would go through the
+        figures.removeAll(toRemove);
+        projectiles.removeAll(toRemove);
+        meteorites.removeAll(toRemove);
+
             // wait 2 seconds than if no more metorites than spawn boss
-        if (elapsedTime >= bossDelay && meteorites.isEmpty() && !isBossSpawned) {
+
+       if (elapsedTime >= bossDelay && meteorites.isEmpty() && !isBossSpawned) {
             figures.add(boss);
             isBossSpawned = true; // Prevent multiple spawns
         }
+
+
     }
 
     @Override
@@ -103,11 +112,6 @@ public class Main extends BasicGame {
             figure.draw(graphics);
         }
 
-        for(Meteorites meteorite : meteorites){
-            graphics.setLineWidth(12);
-
-            font.drawString(meteorite.getX() +meteorite.getWidth()/2 -10,meteorite.getY() +meteorite.getHeight()/2 - 25,"" + meteorite.getMeteorLifes());
-        }
     }
 
 

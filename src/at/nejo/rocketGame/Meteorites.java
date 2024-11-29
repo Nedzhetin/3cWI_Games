@@ -1,9 +1,6 @@
 package at.nejo.rocketGame;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 import java.util.List;
 import java.util.Random;
@@ -13,6 +10,7 @@ public class Meteorites implements Figures{
     private int hight, width;
     Image meteoritImg;
     private int meteorLifes;
+    private AngelCodeFont font = new AngelCodeFont("testdata/hiero.fnt","testdata/hiero.png");
     public enum Size{BIG,MEDIUM,SMALL}
 
 
@@ -21,7 +19,7 @@ public class Meteorites implements Figures{
     private static int meteoriteCount = 0;
 
 
-    public Meteorites(){
+    public Meteorites() throws SlickException {
     }
 
     public Meteorites(Size size) throws SlickException {
@@ -61,6 +59,7 @@ public class Meteorites implements Figures{
     @Override
     public void draw(Graphics graphics) {
         meteoritImg.draw(this.x, this.y);
+        font.drawString(this.x + this.width /2 -10,this.y +this.hight/2 - 25,"" +this.meteorLifes );
     }
 
     @Override
@@ -96,11 +95,12 @@ public class Meteorites implements Figures{
         this.meteorLifes = meteorLifes;
     }
 
+
     public static void spawnMeteorit(int delta, List<Figures> figures, List<Meteorites> meteorites) throws SlickException {
         elapsedTime += delta;
 
         // Create meteorites at intervals
-        if (elapsedTime >= meteoriteInterval && meteoriteCount < 20) {
+        if (elapsedTime >= meteoriteInterval && meteoriteCount < 10) {
             Random random = new Random();
             int randomSize = random.nextInt(3);
             Meteorites meteorite = null;

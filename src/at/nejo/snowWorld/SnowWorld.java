@@ -43,6 +43,8 @@ public class SnowWorld extends BasicGame {
         }
     }
 
+    
+
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
 
