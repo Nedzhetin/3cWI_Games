@@ -1,13 +1,13 @@
 package at.nejo.rocketGame;
 
-import at.nejo.games.firstGame.ObjektGame;
 import org.newdawn.slick.*;
 
 import java.util.*;
 
 public class Main extends BasicGame {
     private List<Figures> figures;
-    private List<Projectiles> projectiles;
+    private List<Projectiles> rocketProjectiles;
+    private List<Projectiles> bossProjectiles;
     private List<Meteorites> meteorites;
     private Rocket rocket;
     private Image tmp;
@@ -32,7 +32,8 @@ public class Main extends BasicGame {
         boss = new Boss(580, -1500); // -500 bocause the Img is big
         rocket = new Rocket(800, 800);
         figures = new ArrayList<>();
-        projectiles = new ArrayList<>();
+        rocketProjectiles = new ArrayList<>();
+        bossProjectiles = new ArrayList<>();
         meteorites = new ArrayList<>();
         timer = new Timer();
 
@@ -50,6 +51,7 @@ public class Main extends BasicGame {
         elapsedTime += delta; // so das der boss nicht derekt spwaned
         List<Figures> toRemove = new ArrayList<>();
 
+
         Meteorites.spawnMeteorit(delta,figures,meteorites);
 
         // Move all figures
@@ -61,20 +63,20 @@ public class Main extends BasicGame {
 
         //delete every objekt that goes of the screen
         // -1700 so the boss doesnt die when he is spawned
-        figures.removeIf(projectile -> projectile.getY() < -1700 || projectile.getY() > gameContainer.getHeight());
+        figures.removeIf(objekt -> objekt.getY() < -1700 || objekt.getY() > gameContainer.getHeight());
 
 
 
 
-        for (Projectiles projectile : projectiles) {
+        for (Projectiles projectile : rocketProjectiles) {
             if (isColliding(projectile, boss)) {
                 if (boss.getY() >= 0) { // Ensure boss is on-screen
                     boss.setBosslifes(boss.getBosslifes() - 1);
-                    System.out.println("It HITT");
                 }
                 toRemove.add(projectile);
             } else {
                 for (Meteorites meteorite : meteorites) {
+
                     if (isColliding(meteorite, projectile)) {
                         meteorite.setMeteorLifes(meteorite.getMeteorLifes() - 1);
                         if (meteorite.getMeteorLifes() <= 0) {
@@ -85,12 +87,25 @@ public class Main extends BasicGame {
                     }
                 }
             }
+
+        }
+
+        for (Meteorites meteorite : meteorites) {
+            if (isColliding(meteorite, rocket)) {
+                System.out.println("hello");
+            }
+        }
+
+        for (Projectiles bossProjectile : bossProjectiles) {
+            if (isColliding(bossProjectile, rocket)) {
+                System.out.println("it hit again");
+            }
         }
 
         // Remove all collided object
         // I had to reacte the toRemove list because sometimes projectiles would go through the
         figures.removeAll(toRemove);
-        projectiles.removeAll(toRemove);
+        rocketProjectiles.removeAll(toRemove);
         meteorites.removeAll(toRemove);
 
             // wait 2 seconds than if no more metorites than spawn boss
@@ -100,12 +115,25 @@ public class Main extends BasicGame {
             isBossSpawned = true; // Prevent multiple spawns
         }
 
+       if (boss.getY() >=20){
+           boss.setX(boss.getX() + boss.getSpeedX()/delta);
+           if (boss.getBosslifes() > 0 && boss.getY() >= 20 && elapsedTime >= 300) {
+               elapsedTime = 0;
+               Projectiles bossProjectile = new Projectiles(boss.getX() +320 ,boss.getY()+ 360,40,40,0,1,1);
+               bossProjectiles.add(bossProjectile);
+               figures.add(bossProjectile);
+           }
+
+       }
+
 
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         backgroundImg.draw();
+
+
 
         // Draw all figures
         for (Figures figure : figures) {
@@ -119,11 +147,12 @@ public class Main extends BasicGame {
     public void keyPressed(int key, char c) {
         // Shoot a projectile when SPACE is pressed
         if (key == Input.KEY_SPACE) {
-            Projectiles projectile = new Projectiles(rocket.getX(), rocket.getY(), 20,20);
+            Projectiles projectile = new Projectiles(rocket.getX(), rocket.getY(), 20,20,0,-1,0);
             figures.add(projectile);
-            projectiles.add(projectile);
+            rocketProjectiles.add(projectile);
         }
     }
+
 
     // Collision detection helper method
     private boolean isColliding(Figures a, Figures b) {

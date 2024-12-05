@@ -100,7 +100,7 @@ public class Meteorites implements Figures{
         elapsedTime += delta;
 
         // Create meteorites at intervals
-        if (elapsedTime >= meteoriteInterval && meteoriteCount < 10) {
+        if (elapsedTime >= meteoriteInterval && meteoriteCount < 2) {
             Random random = new Random();
             int randomSize = random.nextInt(3);
             Meteorites meteorite = null;

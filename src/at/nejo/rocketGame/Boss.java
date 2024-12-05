@@ -7,7 +7,7 @@ public class Boss implements Figures {
    private float x,y;
    private int bosslifes;
    private int width,height;
-   private double speedX;
+   private float speedX;
    private AngelCodeFont font = new AngelCodeFont("testdata/hiero.fnt","testdata/hiero.png");
 
 
@@ -20,7 +20,7 @@ public class Boss implements Figures {
         this. bossImg = tmp.getScaledCopy(800,350);
         this. y = y;
         this.bosslifes = 50;
-        this.speedX = 1.1;
+        this.speedX = 1.1f;
     }
 
 
@@ -33,9 +33,6 @@ public class Boss implements Figures {
     @Override
     public void move(float delta, GameContainer container) {
 
-        if (this.y == 20) {
-            this.x += this.speedX / delta;
-
             if (this.x < 0) {
                 this.x = 0; // Correct position
                 this.speedX = Math.abs(this.speedX); // Ensure speed is positive
@@ -44,7 +41,7 @@ public class Boss implements Figures {
                 this.speedX = -Math.abs(this.speedX); // Ensure speed is negative
             }
 
-        }else{
+        if(this.y < 20){
            this.y += 0.8;
         }
 
@@ -70,6 +67,14 @@ public class Boss implements Figures {
         return this.x;
     }
 
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
     @Override
     public float getHeight() {
         return this.height - 450;
@@ -80,7 +85,11 @@ public class Boss implements Figures {
         return this.width;
     }
 
+    public float getSpeedX() {
+        return speedX;
+    }
 
-
-
+    public void setSpeedX(float speedX) {
+        this.speedX = speedX;
+    }
 }
