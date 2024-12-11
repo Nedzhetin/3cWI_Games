@@ -14,6 +14,9 @@ public class Main extends BasicGame {
     private Image backgroundImg;
     Timer timer;
     private Boss boss;
+    private boolean isPaused = false;
+    private boolean gotHit = false;
+    private boolean won  = false;
 
     private boolean isBossSpawned = false;
     private int bossDelay = 2000; // 2 seconds delay
@@ -47,9 +50,10 @@ public class Main extends BasicGame {
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
-
+        if (isPaused) return;
         elapsedTime += delta; // so das der boss nicht derekt spwaned
         List<Figures> toRemove = new ArrayList<>();
+
 
 
         Meteorites.spawnMeteorit(delta,figures,meteorites);
@@ -70,8 +74,12 @@ public class Main extends BasicGame {
 
         for (Projectiles projectile : rocketProjectiles) {
             if (isColliding(projectile, boss)) {
-                if (boss.getY() >= 0) { // Ensure boss is on-screen
+                if (boss.getY() > 0) { // Ensure boss is on-screen
                     boss.setBosslifes(boss.getBosslifes() - 1);
+                }
+                if(boss.getBosslifes() == 0) {
+                    won = true;
+                    isPaused = true;
                 }
                 toRemove.add(projectile);
             } else {
@@ -90,17 +98,27 @@ public class Main extends BasicGame {
 
         }
 
+
         for (Meteorites meteorite : meteorites) {
             if (isColliding(meteorite, rocket)) {
-                System.out.println("hello");
+                gotHit = true;
+                isPaused = true;
+            }
+
+            if (meteorite.getY() > gameContainer.getHeight()) {
+                gotHit = true;
+                isPaused = true;
             }
         }
 
         for (Projectiles bossProjectile : bossProjectiles) {
             if (isColliding(bossProjectile, rocket)) {
-                System.out.println("it hit again");
+                gotHit = true;
+                isPaused = true;
             }
         }
+
+
 
         // Remove all collided object
         // I had to reacte the toRemove list because sometimes projectiles would go through the
@@ -140,7 +158,18 @@ public class Main extends BasicGame {
             figure.draw(graphics);
         }
 
+        if (gotHit){
+            graphics.setColor(Color.red);
+            displayEndScreen(gameContainer,gameContainer.getGraphics(),0);
+        } else if (won) {
+            graphics.setColor(Color.green);
+            displayEndScreen(gameContainer,gameContainer.getGraphics(),1);
+
+        }
+
     }
+
+
 
 
     @Override
@@ -150,6 +179,16 @@ public class Main extends BasicGame {
             Projectiles projectile = new Projectiles(rocket.getX(), rocket.getY(), 20,20,0,-1,0);
             figures.add(projectile);
             rocketProjectiles.add(projectile);
+        }
+    }
+
+
+    private void displayEndScreen(GameContainer gameContainer, Graphics graphics, int status) {
+        if (status == 0){
+            graphics.drawString("You Lost!",gameContainer.getWidth()/2,gameContainer.getHeight()/2);
+
+        }else{
+            graphics.drawString("You Won!",gameContainer.getWidth()/2,gameContainer.getHeight()/2);
         }
     }
 

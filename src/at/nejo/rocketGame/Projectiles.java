@@ -11,6 +11,8 @@ public class Projectiles implements Figures {
     private float speedY, speedX;
     private int colorSelection;
 
+
+
     public Projectiles(float x, float y, int hight, int width, float speedX, float speedY, int colorSelection) {
         this.x = x;
         this.y = y;
@@ -24,6 +26,7 @@ public class Projectiles implements Figures {
 
     @Override
     public void draw(Graphics graphics) {
+
         if (this.colorSelection == 0) {
             graphics.setColor(Color.white);
         } else {
@@ -60,5 +63,7 @@ public class Projectiles implements Figures {
     public float getWidth() {
         return this.width;
     }
+
+
 }
 

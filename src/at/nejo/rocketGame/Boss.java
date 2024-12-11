@@ -19,7 +19,7 @@ public class Boss implements Figures {
         this.height = 800;
         this. bossImg = tmp.getScaledCopy(800,350);
         this. y = y;
-        this.bosslifes = 50;
+        this.bosslifes = 20;
         this.speedX = 1.1f;
     }
 
