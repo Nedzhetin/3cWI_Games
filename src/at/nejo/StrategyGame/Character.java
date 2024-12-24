@@ -4,19 +4,25 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class Character implements Content {
-    private Image characterImg;
+    private final Image characterImg;
     private float x;
     private float y;
-    private String name;
+    private final String name;
     private int health;
-    private int width = 300;
-    private int height = 300;
+    private final int width = 300;
+    private final int height = 300;
     public enum TYPE {FIRE,ICE,EARTH,WIND,LIGHTING,WATER}
     private TYPE type;
 
 
-    public Character(String name,int health,TYPE type,String imgUrl,float x, float y) throws SlickException {
-        Image tmp = new Image(imgUrl);
+    public Character(String name,int health,TYPE type,String imgUrl,float x, float y) {
+
+        Image tmp = null;
+        try {
+            tmp = new Image(imgUrl);
+        } catch (SlickException e) {
+            throw new RuntimeException(e);
+        }
         this.characterImg = tmp.getScaledCopy(this.width,this.height);
         this.x = x;
         this.y = y;

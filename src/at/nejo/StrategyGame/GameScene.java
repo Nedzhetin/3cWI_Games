@@ -27,6 +27,9 @@ public class GameScene extends BasicGameState {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         graphics.drawString("HELLLOOO",100,100);
+
+        graphics.drawString("" + GameVariables.player1.getName(),100,100);
+        graphics.drawString("" + GameVariables.player2.getName(),1300,100);
     }
 
     @Override
