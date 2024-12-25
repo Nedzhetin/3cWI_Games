@@ -77,7 +77,7 @@ public class CharacterSelectionScene extends BasicGameState {
     public void mouseClicked(int button, int x, int y, int clickCount) {
         for (Content content : GameVariables.contents) {
             if(content instanceof Character) {
-                if(isColliding(x,y,content)) {
+                if(GameVariables.isColliding(x,y,content)) {
                     if (GameVariables.player1 == null){
                         GameVariables.player1 = (Character) content;
                     }else {
@@ -99,7 +99,7 @@ public class CharacterSelectionScene extends BasicGameState {
 
         for (Content content : GameVariables.contents) {
             if(content instanceof Character) {
-                if (isColliding(oldx,oldy,content)) {
+                if (GameVariables.isColliding(oldx,oldy,content)) {
                     arrowPosition.put("x",content.getX() + 100);
                     arrowPosition.put("y",content.getY() - 100);
                     drawArrowImg = true;
@@ -120,11 +120,4 @@ public class CharacterSelectionScene extends BasicGameState {
     }
 
 
-    private boolean isColliding(int x, int y, Content b) {
-
-        return x < b.getX() + b.getWidth() &&
-                x  > b.getX() &&
-                y < b.getY() + b.getHeight() &&
-                y > b.getY();
-    }
 }

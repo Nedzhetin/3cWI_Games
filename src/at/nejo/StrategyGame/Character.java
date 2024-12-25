@@ -1,10 +1,10 @@
 package at.nejo.StrategyGame;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.StateBasedGame;
 
 public class Character implements Content {
-    private final Image characterImg;
+    private Image characterImg;
     private float x;
     private float y;
     private final String name;
@@ -17,13 +17,13 @@ public class Character implements Content {
 
     public Character(String name,int health,TYPE type,String imgUrl,float x, float y) {
 
-        Image tmp = null;
+
         try {
-            tmp = new Image(imgUrl);
+            this.characterImg = new Image(imgUrl);
         } catch (SlickException e) {
             throw new RuntimeException(e);
         }
-        this.characterImg = tmp.getScaledCopy(this.width,this.height);
+        this.characterImg = this.characterImg.getScaledCopy(this.width,this.height);
         this.x = x;
         this.y = y;
         this.name = name;
@@ -33,7 +33,18 @@ public class Character implements Content {
 
     @Override
     public void draw() {
-        characterImg.draw(this.x, this.y);
+        this.characterImg.draw(this.x, this.y);
+
+        if (GameVariables.player1 != null && GameVariables.player2 != null) {
+
+        }
+    }
+
+    public void drawHealthBar(Graphics graphics) {
+        graphics.setColor(Color.black);
+        graphics.drawRect(this.x,this.y - this.height /2,this.width,20);
+        graphics.setColor(Color.green);
+        graphics.fillRect(this.x + 2,this.y - this.height /2 + 2,this.health,18);
     }
 
     @Override
@@ -60,5 +71,25 @@ public class Character implements Content {
         return name;
     }
 
+    public void setXY(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
 
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public Image getCharacterImg() {
+        return characterImg;
+    }
+
+    public void setCharacterImg(Image characterImg) {
+        this.characterImg = characterImg;
+    }
 }

@@ -39,6 +39,9 @@ public class GameVariables {
         contents.add(waterMan);
         contents.add(windMan);
 
+       // player1 = fireMan; //for testing
+       // player2 = earthMan; // for testing
+
         try {
             backgroundImg = new Image("testdata/backgroundImg_strategyGame.jpg");
         } catch (SlickException e) {
@@ -46,5 +49,13 @@ public class GameVariables {
         }
     }
 
+
+    public static boolean isColliding(int x, int y, Content b) {
+
+        return x < b.getX() + b.getWidth() &&
+                x  > b.getX() &&
+                y < b.getY() + b.getHeight() &&
+                y > b.getY();
+    }
 
 }
