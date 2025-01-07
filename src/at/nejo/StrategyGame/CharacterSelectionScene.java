@@ -80,6 +80,7 @@ public class CharacterSelectionScene extends BasicGameState {
                 if(GameVariables.isColliding(x,y,content)) {
                     if (GameVariables.player1 == null){
                         GameVariables.player1 = (Character) content;
+                        GameVariables.currentPlayer = GameVariables.player1;
                     }else {
                         GameVariables.player2 = (Character) content;
                         System.out.println(GameVariables.player2.getName());

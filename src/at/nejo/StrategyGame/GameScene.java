@@ -1,8 +1,13 @@
 package at.nejo.StrategyGame;
 
+import net.java.games.input.Component;
 import org.newdawn.slick.*;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import java.awt.*;
 
 public class GameScene extends BasicGameState {
 
@@ -59,5 +64,19 @@ public class GameScene extends BasicGameState {
             }
         }
     }
+
+   public void keyPressed(int key, char c) {
+        if (key == Input.KEY_1) {
+            if (GameVariables.currentPlayer == GameVariables.player1) {
+                GameVariables.player2.setHealth(GameVariables.player2.getHealth() - 10);
+                GameVariables.currentPlayer = GameVariables.player2;
+                System.out.println("sldkfj");
+            }else {
+                GameVariables.player1.setHealth(GameVariables.player1.getHealth() - 10);
+                GameVariables.currentPlayer = GameVariables.player1;
+            }
+            System.out.println("1 was pressed");
+        }
+   }
 
 }

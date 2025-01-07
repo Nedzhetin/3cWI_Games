@@ -10,11 +10,11 @@ import java.util.List;
 
 public class GameVariables {
 
-
      public static Image backgroundImg;
 
      public  static Character player1 = null;
      public  static Character player2 = null;
+     public static Character currentPlayer = null;
 
 
     public static final Character fireMan = new Character("Pablo",100, Character.TYPE.FIRE,"testdata/fireCharacterImg.png",50,1100);
