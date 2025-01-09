@@ -14,6 +14,8 @@ public class Character implements Content {
     public enum TYPE {FIRE,ICE,EARTH,WIND,LIGHTING,WATER}
     private TYPE type;
 
+    private boolean isBig;
+
 
     public Character(String name,int health,TYPE type,String imgUrl,float x, float y) {
 
@@ -33,6 +35,10 @@ public class Character implements Content {
 
     @Override
     public void draw() {
+        if (isBig){
+           this.characterImg = this.characterImg.getScaledCopy(500,500);
+        }
+
         this.characterImg.draw(this.x, this.y);
 
         if (GameVariables.player1 != null && GameVariables.player2 != null) {
@@ -42,15 +48,16 @@ public class Character implements Content {
 
     public void drawHealthBar(Graphics graphics) {
         graphics.setColor(Color.black);
-        graphics.drawRect(this.x,this.y - this.height /2,this.width,20);
+        graphics.drawRect(this.x +120,this.y - this.height /2,this.width,25);
         graphics.setColor(Color.green);
-        graphics.fillRect(this.x + 2,this.y - this.height /2 + 2,this.health,18);
+        graphics.fillRect(this.x + 122,this.y - this.height /2 + 2,this.health,23);
     }
 
     @Override
     public float getX() {
         return x;
     }
+
 
     @Override
     public float getY() {
@@ -91,5 +98,13 @@ public class Character implements Content {
 
     public void setCharacterImg(Image characterImg) {
         this.characterImg = characterImg;
+    }
+
+    public boolean isBig() {
+        return isBig;
+    }
+
+    public void setBig(boolean big) {
+        isBig = big;
     }
 }

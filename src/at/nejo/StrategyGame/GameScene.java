@@ -24,10 +24,7 @@ public class GameScene extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        if (GameVariables.player1 != null && GameVariables.player2 != null) {
-            Image newPlayer1Img = GameVariables.player1.getCharacterImg().getScaledCopy(600,600);
-            GameVariables.player1.setCharacterImg(newPlayer1Img);
-        }
+
     }
 
     @Override
@@ -35,17 +32,20 @@ public class GameScene extends BasicGameState {
 
         GameVariables.backgroundImg.draw();
 
-        GameVariables.player1.setXY(200,700);
+        GameVariables.player1.setXY(200,500);
         GameVariables.player1.draw();
         GameVariables.player1.drawHealthBar(graphics);
 
-        GameVariables.player2.setXY(1500,700);
+        GameVariables.player2.setXY(1200,500);
         GameVariables.player2.draw();
         GameVariables.player2.drawHealthBar(graphics);
 
+        if (GameVariables.currentPlayer == GameVariables.player1) {
+            GameVariables.font.drawString(800,100,"Player 1 turn");
+        }else{
+            GameVariables.font.drawString(800,100,"Player 2 turn");
+        }
 
-        graphics.drawString("" + GameVariables.player1.getName(),100,100);
-        graphics.drawString("" + GameVariables.player2.getName(),1300,100);
     }
 
     @Override
@@ -70,13 +70,14 @@ public class GameScene extends BasicGameState {
             if (GameVariables.currentPlayer == GameVariables.player1) {
                 GameVariables.player2.setHealth(GameVariables.player2.getHealth() - 10);
                 GameVariables.currentPlayer = GameVariables.player2;
-                System.out.println("sldkfj");
             }else {
+                GameVariables.font.drawString(1000,200,"Player 2 turn");
                 GameVariables.player1.setHealth(GameVariables.player1.getHealth() - 10);
                 GameVariables.currentPlayer = GameVariables.player1;
             }
             System.out.println("1 was pressed");
         }
    }
+
 
 }

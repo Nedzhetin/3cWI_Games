@@ -11,10 +11,12 @@ import java.util.List;
 public class GameVariables {
 
      public static Image backgroundImg;
+     public static AngelCodeFont font;
 
-     public  static Character player1 = null;
-     public  static Character player2 = null;
+     public static Character player1 = null;
+     public static Character player2 = null;
      public static Character currentPlayer = null;
+
 
 
     public static final Character fireMan = new Character("Pablo",100, Character.TYPE.FIRE,"testdata/fireCharacterImg.png",50,1100);
@@ -23,6 +25,7 @@ public class GameVariables {
     public static final Character lightingMan = new Character("Cid",80,Character.TYPE.LIGHTING,"testdata/lightingCharacterImg.png",950,1100);
     public static final Character waterMan = new Character("Muhammad",90,Character.TYPE.WATER,"testdata/waterCharacterImg.png",1250,1100);
     public static final Character windMan = new Character("Mehmet",110,Character.TYPE.WIND,"testdata/windCharacterImg.png",1550,1100);
+
 
 
     public static List<Content> contents = new ArrayList<Content>();
@@ -39,11 +42,10 @@ public class GameVariables {
         contents.add(waterMan);
         contents.add(windMan);
 
-       // player1 = fireMan; //for testing
-       // player2 = earthMan; // for testing
 
         try {
             backgroundImg = new Image("testdata/backgroundImg_strategyGame.jpg");
+            font =  new AngelCodeFont("testdata/hiero.fnt","testdata/hiero.png");
         } catch (SlickException e) {
             throw new RuntimeException(e);
         }

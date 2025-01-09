@@ -13,7 +13,7 @@ public class CharacterSelectionScene extends BasicGameState {
 
 
 
-    private AngelCodeFont font;
+
 
     private Image arrowImg;
     private boolean drawArrowImg = false;
@@ -31,7 +31,7 @@ public class CharacterSelectionScene extends BasicGameState {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
 
         GameVariables.backgroundImg = GameVariables.backgroundImg.getScaledCopy(2000,1500);
-        font = new AngelCodeFont("testdata/hiero.fnt","testdata/hiero.png");
+
 
         arrowImg = new Image("testdata/arrowImg.png");
         arrowImg = arrowImg.getScaledCopy(100,100);
@@ -57,12 +57,9 @@ public class CharacterSelectionScene extends BasicGameState {
         }
 
         if (GameVariables.player1 == null){
-            font.drawString(700,650,"Player 1 choose your Character");
+            GameVariables.font.drawString(700,650,"Player 1 choose your Character");
         }else if(GameVariables.player2 == null) {
-            font.drawString(700,650,"Player 2 choose your Character");
-        }else{
-            font.drawString(100,100, "Player 1: " + GameVariables.player1.getName());
-            font.drawString(gameContainer.getWidth() - 500,100, "Player 2: " + GameVariables.player2.getName());
+            GameVariables.font.drawString(700,650,"Player 2 choose your Character");
         }
     }
 
@@ -70,6 +67,9 @@ public class CharacterSelectionScene extends BasicGameState {
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         if (GameVariables.player1 != null && GameVariables.player2 != null) {
             stateBasedGame.enterState(Main.GAME_SCENE);
+            GameVariables.player1.setBig(true);
+            GameVariables.player2.setBig(true);
+
         }
     }
 
