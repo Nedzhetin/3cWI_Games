@@ -12,6 +12,8 @@ import java.awt.*;
 public class GameScene extends BasicGameState {
 
     private int stateId;
+    private boolean drawAbility;
+
 
     public GameScene(int stateId) {
         this.stateId = stateId;
@@ -24,6 +26,7 @@ public class GameScene extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+        this.drawAbility = false;
 
     }
 
@@ -31,6 +34,24 @@ public class GameScene extends BasicGameState {
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
 
         GameVariables.backgroundImg.draw();
+
+
+        if (this.drawAbility) {
+
+            GameVariables.currentPlayer.getFirstAbility().draw();
+            GameVariables.currentPlayer.getSecondAbility().move();
+
+
+            if (GameVariables.isCollidingAbilityCharacter(GameVariables.currentPlayer.getFirstAbility(),GameVariables.opponentPlayer)){
+                GameVariables.opponentPlayer.setHealth(GameVariables.opponentPlayer.getHealth() - 10);
+                changePLayers();
+                this.drawAbility = false;
+            }
+        }
+
+
+
+
 
         GameVariables.player1.setXY(200,500);
         GameVariables.player1.draw();
@@ -51,6 +72,7 @@ public class GameScene extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
 
+
     }
 
     public void mouseClicked(int button, int x, int y, int clickCount) {
@@ -58,7 +80,6 @@ public class GameScene extends BasicGameState {
             if(content instanceof Character) {
                 if(GameVariables.isColliding(x,y,content)) {
 
-                    ((Character) content).setHealth( ((Character) content).getHealth() - 10);
                     System.out.println(((Character) content).getHealth());
                 }
             }
@@ -68,16 +89,28 @@ public class GameScene extends BasicGameState {
    public void keyPressed(int key, char c) {
         if (key == Input.KEY_1) {
             if (GameVariables.currentPlayer == GameVariables.player1) {
-                GameVariables.player2.setHealth(GameVariables.player2.getHealth() - 10);
-                GameVariables.currentPlayer = GameVariables.player2;
-            }else {
-                GameVariables.font.drawString(1000,200,"Player 2 turn");
-                GameVariables.player1.setHealth(GameVariables.player1.getHealth() - 10);
-                GameVariables.currentPlayer = GameVariables.player1;
+                GameVariables.currentPlayer.getFirstAbility().setX(GameVariables.currentPlayer.getX() + GameVariables.currentPlayer.getWidth() + 10);
+                GameVariables.currentPlayer.getFirstAbility().setY(GameVariables.currentPlayer.getY() + GameVariables.currentPlayer.getHeight()/2);
+            }else{
+                GameVariables.currentPlayer.getFirstAbility().setX(GameVariables.currentPlayer.getX() - GameVariables.currentPlayer.getWidth() + 10);
+                GameVariables.currentPlayer.getFirstAbility().setY(GameVariables.currentPlayer.getY() + GameVariables.currentPlayer.getHeight()/2);
             }
-            System.out.println("1 was pressed");
+
+
+            this.drawAbility = true;
+
         }
    }
 
+
+   public void changePLayers(){
+       if (GameVariables.currentPlayer == GameVariables.player1) {
+           GameVariables.currentPlayer = GameVariables.player2;
+           GameVariables.opponentPlayer = GameVariables.player1;
+       } else if (GameVariables.currentPlayer == GameVariables.player2) {
+           GameVariables.currentPlayer = GameVariables.player1;
+           GameVariables.opponentPlayer = GameVariables.player2;
+       }
+   }
 
 }

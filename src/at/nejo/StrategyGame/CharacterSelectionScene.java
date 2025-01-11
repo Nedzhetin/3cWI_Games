@@ -83,6 +83,7 @@ public class CharacterSelectionScene extends BasicGameState {
                         GameVariables.currentPlayer = GameVariables.player1;
                     }else {
                         GameVariables.player2 = (Character) content;
+                        GameVariables.opponentPlayer = GameVariables.player2;
                         System.out.println(GameVariables.player2.getName());
                     }
 

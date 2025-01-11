@@ -15,9 +15,11 @@ public class Character implements Content {
     private TYPE type;
 
     private boolean isBig;
+    private Ability firstAbility;
+    private Ability secondAbility;
 
 
-    public Character(String name,int health,TYPE type,String imgUrl,float x, float y) {
+    public Character(String name,int health,TYPE type,String imgUrl,float x, float y,Ability firstAbility,Ability secondAbility) {
 
 
         try {
@@ -31,6 +33,8 @@ public class Character implements Content {
         this.name = name;
         this.health = health;
         this.type = type;
+        this.firstAbility = firstAbility;
+        this.secondAbility = secondAbility;
     }
 
     @Override
@@ -106,5 +110,13 @@ public class Character implements Content {
 
     public void setBig(boolean big) {
         isBig = big;
+    }
+
+    public Ability getFirstAbility() {
+        return firstAbility;
+    }
+
+    public Ability getSecondAbility() {
+        return secondAbility;
     }
 }
