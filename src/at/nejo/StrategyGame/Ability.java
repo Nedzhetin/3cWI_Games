@@ -28,12 +28,19 @@ public class Ability implements Content {
     @Override
     public void draw() {
         if (GameVariables.currentPlayer == GameVariables.player2){
-            this. abilityImg = this.abilityImg.getFlippedCopy(true,false);
+           this. abilityImg = this.abilityImg.getFlippedCopy(true,false);
+
         }
+        this.abilityImg.draw(this.x, this.y);
+
+    }
+
+    public void drawAbility(Image img) {
 
         this.abilityImg.draw(this.x, this.y);
 
     }
+
 
 
     public void move(){
@@ -79,5 +86,13 @@ public class Ability implements Content {
 
     public void setY(float y) {
         this.y = y;
+    }
+
+    public Image getAbilityImg() {
+        return abilityImg;
+    }
+
+    public void setAbilityImg(Image abilityImg) {
+        this.abilityImg = abilityImg;
     }
 }

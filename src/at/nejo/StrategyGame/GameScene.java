@@ -39,7 +39,15 @@ public class GameScene extends BasicGameState {
         if (this.drawAbility) {
 
             GameVariables.currentPlayer.getFirstAbility().draw();
-            GameVariables.currentPlayer.getSecondAbility().move();
+
+            if (GameVariables.currentPlayer == GameVariables.player2){
+                GameVariables.currentPlayer.getFirstAbility().setAbilityImg(GameVariables.currentPlayer.getFirstAbility().getAbilityImg().getFlippedCopy(true,false));
+
+            }
+
+            GameVariables.currentPlayer.getFirstAbility().move();
+
+
 
 
             if (GameVariables.isCollidingAbilityCharacter(GameVariables.currentPlayer.getFirstAbility(),GameVariables.opponentPlayer)){

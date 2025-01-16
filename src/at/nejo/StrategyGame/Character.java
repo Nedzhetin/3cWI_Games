@@ -11,7 +11,7 @@ public class Character implements Content {
     private int health;
     private final int width = 300;
     private final int height = 300;
-    public enum TYPE {FIRE,ICE,EARTH,WIND,LIGHTING,WATER}
+    public enum TYPE {FIRE,ICE,EARTH,WIND,LIGHTNING,WATER}
     private TYPE type;
 
     private boolean isBig;
