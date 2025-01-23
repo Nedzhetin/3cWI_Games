@@ -4,6 +4,7 @@ import at.nejo.StrategyGame.Content;
 import at.nejo.StrategyGame.GameVariables;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import at.nejo.StrategyGame.Character;
 
 public abstract class Ability  {
     private int abilityDamage;
@@ -16,18 +17,22 @@ public abstract class Ability  {
     public Ability(int abilityDamage,String imgUrl) {
         this.abilityDamage = abilityDamage;
 
+        if(imgUrl != ""){
+
         try {
             this.abilityImg = new Image(imgUrl);
         } catch (SlickException e) {
             throw new RuntimeException(e);
         }
+            this.abilityImg = this.abilityImg.getScaledCopy(this.width,this.height);
 
-        this.abilityImg = this.abilityImg.getScaledCopy(this.width,this.height);
+        }
 
     }
 
 
     public abstract void draw();
+    public abstract void ActivateAbility(Character currentPlayer, Character opponentPlayer);
 
     public void drawAbility(Image img) {
 

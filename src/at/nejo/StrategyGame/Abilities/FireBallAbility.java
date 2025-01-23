@@ -1,6 +1,7 @@
 package at.nejo.StrategyGame.Abilities;
 
 import at.nejo.StrategyGame.GameVariables;
+import at.nejo.StrategyGame.Character;
 
 public class FireBallAbility extends Ability{
     public FireBallAbility(int abilityDamage, String imgUrl) {
@@ -18,7 +19,17 @@ public class FireBallAbility extends Ability{
     }
 
     @Override
+    public void ActivateAbility(Character currentPlayer, Character opponentPlayer) {
+        opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
+    }
+
+
+
+
+    @Override
     public void move() {
+
+
             if(GameVariables.currentPlayer == GameVariables.player1){
                 setX(getX() + 1);
 
@@ -27,6 +38,7 @@ public class FireBallAbility extends Ability{
 
         }
     }
+
 
 
 }

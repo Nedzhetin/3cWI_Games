@@ -1,18 +1,16 @@
 package at.nejo.StrategyGame;
 
-import net.java.games.input.Component;
+import at.nejo.StrategyGame.Abilities.Ability;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-
-import java.awt.*;
 
 public class GameScene extends BasicGameState {
 
     private int stateId;
-    private boolean drawAbility;
+    private boolean useFirstAbility;
+    private boolean useSecondAbility;
 
 
     public GameScene(int stateId) {
@@ -26,7 +24,8 @@ public class GameScene extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        this.drawAbility = false;
+        this.useFirstAbility = false;
+        this.useSecondAbility = false;
 
     }
 
@@ -36,25 +35,14 @@ public class GameScene extends BasicGameState {
         GameVariables.backgroundImg.draw();
 
 
-        if (this.drawAbility) {
+        if (this.useFirstAbility) {
+            handleAbility(GameVariables.currentPlayer.getFirstAbility());
 
-            GameVariables.currentPlayer.getFirstAbility().draw();
+        }
 
-            if (GameVariables.currentPlayer == GameVariables.player2){
-                GameVariables.currentPlayer.getFirstAbility().setAbilityImg(GameVariables.currentPlayer.getFirstAbility().getAbilityImg().getFlippedCopy(true,false));
+        if (this.useSecondAbility) {
+            handleAbility(GameVariables.currentPlayer.getSecondAbility());
 
-            }
-
-            GameVariables.currentPlayer.getFirstAbility().move();
-
-
-
-
-            if (GameVariables.isCollidingAbilityCharacter(GameVariables.currentPlayer.getFirstAbility(),GameVariables.opponentPlayer)){
-                GameVariables.opponentPlayer.setHealth(GameVariables.opponentPlayer.getHealth() - 10);
-                changePLayers();
-                this.drawAbility = false;
-            }
         }
 
 
@@ -104,9 +92,11 @@ public class GameScene extends BasicGameState {
                 GameVariables.currentPlayer.getFirstAbility().setY(GameVariables.currentPlayer.getY() + GameVariables.currentPlayer.getHeight()/2);
             }
 
+            this.useFirstAbility = true;
 
-            this.drawAbility = true;
-
+        }
+        if (key == Input.KEY_2){
+            this.useSecondAbility = true;
         }
    }
 
@@ -119,6 +109,29 @@ public class GameScene extends BasicGameState {
            GameVariables.currentPlayer = GameVariables.player1;
            GameVariables.opponentPlayer = GameVariables.player2;
        }
+   }
+
+   public void handleAbility(Ability ability){
+       if (ability.getAbilityImg() != null){
+           ability.draw();
+
+           if (GameVariables.currentPlayer == GameVariables.player2){
+               ability.setAbilityImg(ability.getAbilityImg().getFlippedCopy(true,false));
+
+           }
+           ability.move();
+
+           if (GameVariables.isCollidingAbilityCharacter(GameVariables.currentPlayer.getFirstAbility(),GameVariables.opponentPlayer)){
+               GameVariables.currentPlayer.getFirstAbility().ActivateAbility(GameVariables.currentPlayer,GameVariables.opponentPlayer);
+               changePLayers();
+               this.useFirstAbility = false;
+           }
+       }else {
+               GameVariables.currentPlayer.getSecondAbility().ActivateAbility(GameVariables.currentPlayer,GameVariables.opponentPlayer);
+               changePLayers();
+               this.useSecondAbility = false;
+       }
+
    }
 
 }
