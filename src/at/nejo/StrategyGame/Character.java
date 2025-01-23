@@ -1,7 +1,7 @@
 package at.nejo.StrategyGame;
 
+import at.nejo.StrategyGame.Abilities.Ability;
 import org.newdawn.slick.*;
-import org.newdawn.slick.state.StateBasedGame;
 
 public class Character implements Content {
     private Image characterImg;

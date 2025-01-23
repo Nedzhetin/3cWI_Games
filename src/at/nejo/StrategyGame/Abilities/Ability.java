@@ -1,10 +1,11 @@
-package at.nejo.StrategyGame;
+package at.nejo.StrategyGame.Abilities;
 
+import at.nejo.StrategyGame.Content;
+import at.nejo.StrategyGame.GameVariables;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tests.ImageGraphicsTest;
 
-public class Ability implements Content {
+public abstract class Ability  {
     private int abilityDamage;
     private float x;
     private float y;
@@ -25,15 +26,8 @@ public class Ability implements Content {
 
     }
 
-    @Override
-    public void draw() {
-        if (GameVariables.currentPlayer == GameVariables.player2){
-           this. abilityImg = this.abilityImg.getFlippedCopy(true,false);
 
-        }
-        this.abilityImg.draw(this.x, this.y);
-
-    }
+    public abstract void draw();
 
     public void drawAbility(Image img) {
 
@@ -43,31 +37,24 @@ public class Ability implements Content {
 
 
 
-    public void move(){
-        if(GameVariables.currentPlayer == GameVariables.player1){
-            this.x += 1;
+    public abstract void move();
 
-        }else{
-            this.x -= 1;
-        }
-    }
 
-    @Override
     public float getX() {
         return this.x;
     }
 
-    @Override
+
     public float getY() {
         return this.y;
     }
 
-    @Override
+
     public int getWidth() {
         return this.width;
     }
 
-    @Override
+
     public int getHeight() {
         return this.height;
     }
