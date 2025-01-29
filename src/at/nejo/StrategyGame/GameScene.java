@@ -33,7 +33,7 @@ public class GameScene extends BasicGameState {
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
 
         GameVariables.backgroundImg.draw();
-        GameVariables.drawAbilityBtn(graphics);
+        GameVariables.drawAbilityBtns(graphics);
 
 
         if (this.useFirstAbility) {
@@ -113,7 +113,7 @@ public class GameScene extends BasicGameState {
    }
 
    public void handleAbility(Ability ability){
-       if (ability.getAbilityImg() != null){
+       if (ability.isDrawAbility()) {
            ability.draw();
 
            if (GameVariables.currentPlayer == GameVariables.player2){

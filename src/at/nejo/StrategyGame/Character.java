@@ -52,6 +52,7 @@ public class Character implements Content {
 
     public void drawHealthBar(Graphics graphics) {
         graphics.setColor(Color.black);
+
         graphics.drawRect(this.x +120,this.y - this.height /2,this.width,25);
         graphics.setColor(Color.green);
         graphics.fillRect(this.x + 122,this.y - this.height /2 + 2,this.health,23);

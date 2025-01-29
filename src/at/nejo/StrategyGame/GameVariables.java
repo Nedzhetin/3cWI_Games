@@ -15,6 +15,7 @@ public class GameVariables {
 
      public static Image backgroundImg;
      public static AngelCodeFont font;
+     public static AngelCodeFont font2;
 
      public static Character player1 = null;
      public static Character player2 = null;
@@ -23,7 +24,7 @@ public class GameVariables {
 
 
      public static FireBallAbility fireBallAbility = new FireBallAbility(10,"testdata/fireBallAbilityImg.png",true);
-     public static HealAbility healAbility = new HealAbility(-20,"",false);
+     public static HealAbility healAbility = new HealAbility(-20,"testdata/healAbilityImg.png",false);
 
 
 
@@ -56,6 +57,7 @@ public class GameVariables {
         try {
             backgroundImg = new Image("testdata/backgroundImg_strategyGame.jpg");
             font =  new AngelCodeFont("testdata/hiero.fnt","testdata/hiero.png");
+            font2 = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
         } catch (SlickException e) {
             throw new RuntimeException(e);
         }
@@ -79,13 +81,23 @@ public class GameVariables {
                 a.getY() + a.getHeight() > b.getY();
     }
 
-    public static void drawAbilityBtn(Graphics graphics) {
+    public static void drawAbilityBtns(Graphics graphics) {
         graphics.setColor(graphics.getColor().black);
         graphics.setLineWidth(5);
-        graphics.drawRect(340,1050,120,120);
-        GameVariables.currentPlayer.getFirstAbility().getAbilityImg().draw(350,1050,120,120);
 
+        graphics.drawRect(340,1050,120,120);
+        GameVariables.player1.getFirstAbility().getAbilityImg().draw(340,1050,120,120);
+        font2.drawString(350,1135,"1");
         graphics.drawRect(490,1050,120,120);
+        GameVariables.player1.getSecondAbility().getAbilityImg().draw(490,1050,120,120);
+        font2.drawString(500,1135,"2");
+
+        graphics.drawRect(1320,1050,120,120);
+        GameVariables.player2.getFirstAbility().getAbilityImg().draw(1320,1050,120,120);
+        font2.drawString(1330,1135,"1");
+        graphics.drawRect(1470,1050,120,120);
+        GameVariables.player2.getSecondAbility().getAbilityImg().draw(1470,1050,120,120);
+        font2.drawString(1480,1135,"2");
 
     }
 

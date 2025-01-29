@@ -62,6 +62,10 @@ public abstract class Ability  {
         return this.width;
     }
 
+    public boolean isDrawAbility() {
+        return this.drawAbility;
+    }
+
 
     public int getHeight() {
         return this.height;
