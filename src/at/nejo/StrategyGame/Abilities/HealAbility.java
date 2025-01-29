@@ -2,8 +2,8 @@ package at.nejo.StrategyGame.Abilities;
 import at.nejo.StrategyGame.Character;
 
 public class HealAbility extends Ability{
-    public HealAbility(int abilityDamage, String imgUrl) {
-        super(abilityDamage, imgUrl);
+    public HealAbility(int abilityDamage, String imgUrl, boolean drawAbility) {
+        super(abilityDamage, imgUrl, drawAbility);
     }
 
     @Override

@@ -4,6 +4,7 @@ import at.nejo.StrategyGame.Abilities.Ability;
 import at.nejo.StrategyGame.Abilities.FireBallAbility;
 import at.nejo.StrategyGame.Abilities.HealAbility;
 import org.newdawn.slick.AngelCodeFont;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -21,12 +22,10 @@ public class GameVariables {
      public static Character opponentPlayer = null;
 
 
-     public static FireBallAbility fireBallAbility = new FireBallAbility(10,"testdata/fireBallAbilityImg.png");
-     public static HealAbility healAbility = new HealAbility(-20,"");
+     public static FireBallAbility fireBallAbility = new FireBallAbility(10,"testdata/fireBallAbilityImg.png",true);
+     public static HealAbility healAbility = new HealAbility(-20,"",false);
 
 
-
-   //  public static Ability snowBallAbility = new Ability(10,"testdata/snowBallAbilityImg.png");
 
 
 
@@ -80,5 +79,14 @@ public class GameVariables {
                 a.getY() + a.getHeight() > b.getY();
     }
 
+    public static void drawAbilityBtn(Graphics graphics) {
+        graphics.setColor(graphics.getColor().black);
+        graphics.setLineWidth(5);
+        graphics.drawRect(340,1050,120,120);
+        GameVariables.currentPlayer.getFirstAbility().getAbilityImg().draw(350,1050,120,120);
+
+        graphics.drawRect(490,1050,120,120);
+
+    }
 
 }

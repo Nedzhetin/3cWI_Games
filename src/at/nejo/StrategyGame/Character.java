@@ -119,4 +119,6 @@ public class Character implements Content {
     public Ability getSecondAbility() {
         return secondAbility;
     }
+
+
 }
