@@ -13,7 +13,9 @@ public class HealAbility extends Ability{
 
     @Override
     public void ActivateAbility(Character currentPlayer, Character opponentPlayer) {
-        currentPlayer.setHealth(currentPlayer.getHealth() - this.getAbilityDamage());
+        if (currentPlayer.getNerfDuration() == 0){
+            currentPlayer.setHealth(currentPlayer.getHealth() - this.getAbilityDamage());
+        }
     }
 
 

@@ -3,6 +3,7 @@ package at.nejo.StrategyGame;
 import at.nejo.StrategyGame.Abilities.Ability;
 import at.nejo.StrategyGame.Abilities.FireBallAbility;
 import at.nejo.StrategyGame.Abilities.HealAbility;
+import at.nejo.StrategyGame.Abilities.SnowBallAbility;
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -14,6 +15,7 @@ import java.util.List;
 public class GameVariables {
 
      public static Image backgroundImg;
+     public static Image frozenImg;
      public static AngelCodeFont font;
      public static AngelCodeFont font2;
 
@@ -25,6 +27,7 @@ public class GameVariables {
 
      public static FireBallAbility fireBallAbility = new FireBallAbility(10,"testdata/fireBallAbilityImg.png",true);
      public static HealAbility healAbility = new HealAbility(-20,"testdata/healAbilityImg.png",false);
+     public static SnowBallAbility snowBallAbility = new SnowBallAbility(5,"testdata/snowBallAbilityImg.png",true);
 
 
 
@@ -32,7 +35,7 @@ public class GameVariables {
 
 
     public static final Character fireMan = new Character("Pablo",100, Character.TYPE.FIRE,"testdata/fireCharacterImg.png",50,1100,fireBallAbility,healAbility);
-    public static final Character iceMan = new Character("Cryo",120, Character.TYPE.ICE,"testdata/iceCharacterImg.png",350,1100,fireBallAbility,healAbility);
+    public static final Character iceMan = new Character("Cryo",120, Character.TYPE.ICE,"testdata/iceCharacterImg.png",350,1100,snowBallAbility,healAbility);
     public static final Character earthMan = new Character("Muhammand",150,Character.TYPE.EARTH,"testdata/earthManImg.png",650,1100,fireBallAbility,fireBallAbility);
     public static final Character lightingMan = new Character("Cid",80,Character.TYPE.LIGHTNING,"testdata/lightingCharacterImg.png",950,1100,fireBallAbility,fireBallAbility);
     public static final Character waterMan = new Character("Muhammad",90,Character.TYPE.WATER,"testdata/waterCharacterImg.png",1250,1100,fireBallAbility,fireBallAbility);
@@ -58,6 +61,7 @@ public class GameVariables {
             backgroundImg = new Image("testdata/backgroundImg_strategyGame.jpg");
             font =  new AngelCodeFont("testdata/hiero.fnt","testdata/hiero.png");
             font2 = new AngelCodeFont("testdata/demo2.fnt","testdata/demo2_00.tga");
+            frozenImg = new Image("testdata/frozenImg.png");
         } catch (SlickException e) {
             throw new RuntimeException(e);
         }

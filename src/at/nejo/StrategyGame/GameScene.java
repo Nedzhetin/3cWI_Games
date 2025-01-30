@@ -60,6 +60,9 @@ public class GameScene extends BasicGameState {
 
         if (GameVariables.currentPlayer == GameVariables.player1) {
             GameVariables.font.drawString(800,100,"Player 1 turn");
+            if (GameVariables.currentPlayer.getNerfDuration() > 0){
+                GameVariables.currentPlayer.setNerfDuration(GameVariables.currentPlayer.getNerfDuration() - 1);
+            }
         }else{
             GameVariables.font.drawString(800,100,"Player 2 turn");
         }

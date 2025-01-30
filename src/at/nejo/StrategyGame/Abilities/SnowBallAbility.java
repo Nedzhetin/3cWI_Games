@@ -1,12 +1,13 @@
 package at.nejo.StrategyGame.Abilities;
-
-import at.nejo.StrategyGame.GameVariables;
 import at.nejo.StrategyGame.Character;
+import at.nejo.StrategyGame.GameVariables;
+import org.newdawn.slick.Image;
 
-public class FireBallAbility extends Ability{
-    public FireBallAbility(int abilityDamage, String imgUrl, boolean drawAbility) {
+public class SnowBallAbility extends Ability{
+    public SnowBallAbility(int abilityDamage, String imgUrl, boolean drawAbility) {
         super(abilityDamage, imgUrl, drawAbility);
     }
+
 
     @Override
     public void draw() {
@@ -17,30 +18,27 @@ public class FireBallAbility extends Ability{
         getAbilityImg().draw(getX(),getY());
 
     }
-
     @Override
     public void ActivateAbility(Character currentPlayer, Character opponentPlayer) {
         if (currentPlayer.getNerfDuration() == 0){
             opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
+            opponentPlayer.setFrozen(true);
+            opponentPlayer.setNerfDuration(1);
         }
-    }
 
+    }
 
 
 
     @Override
     public void move() {
 
+        if(GameVariables.currentPlayer == GameVariables.player1){
+            setX(getX() + 1);
 
-            if(GameVariables.currentPlayer == GameVariables.player1){
-                setX(getX() + 1);
-
-            }else{
-                setX(getX() -1);
+        }else{
+            setX(getX() -1);
 
         }
     }
-
-
-
 }

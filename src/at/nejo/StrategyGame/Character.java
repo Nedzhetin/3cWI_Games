@@ -13,6 +13,8 @@ public class Character implements Content {
     private final int height = 300;
     public enum TYPE {FIRE,ICE,EARTH,WIND,LIGHTNING,WATER}
     private TYPE type;
+    private boolean isFrozen;
+    private int nerfDuration;
 
     private boolean isBig;
     private Ability firstAbility;
@@ -35,6 +37,8 @@ public class Character implements Content {
         this.type = type;
         this.firstAbility = firstAbility;
         this.secondAbility = secondAbility;
+        this.isFrozen = false;
+        this.nerfDuration = 0;
     }
 
     @Override
@@ -47,6 +51,12 @@ public class Character implements Content {
 
         if (GameVariables.player1 != null && GameVariables.player2 != null) {
 
+        }
+
+        if (isFrozen && nerfDuration > 0){
+            this.setCharacterImg(GameVariables.frozenImg);
+        }else {
+    //  hier weiter programieren
         }
     }
 
@@ -97,6 +107,14 @@ public class Character implements Content {
         return health;
     }
 
+    public boolean isFrozen() {
+        return isFrozen;
+    }
+
+    public void setFrozen(boolean frozen) {
+        isFrozen = frozen;
+    }
+
     public Image getCharacterImg() {
         return characterImg;
     }
@@ -121,5 +139,11 @@ public class Character implements Content {
         return secondAbility;
     }
 
+    public int getNerfDuration() {
+        return nerfDuration;
+    }
 
+    public void setNerfDuration(int nerfDuration) {
+        this.nerfDuration = nerfDuration;
+    }
 }
