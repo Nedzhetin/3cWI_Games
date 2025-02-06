@@ -12,11 +12,7 @@ public class FireBallAbility extends Ability{
     public void draw() {
         if (GameVariables.currentPlayer.isFrozen()){
             return;
-    }else{
-            if (GameVariables.currentPlayer == GameVariables.player2){
-                setAbilityImg(getAbilityImg().getFlippedCopy(true, false));
-
-            }
+        }else{
             getAbilityImg().draw(getX(),getY());
         }
     }

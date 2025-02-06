@@ -1,6 +1,7 @@
 package at.nejo.StrategyGame;
 
-import at.nejo.StrategyGame.Abilities.Ability;
+import at.nejo.StrategyGame.Abilities.AbilityManager;
+import at.nejo.StrategyGame.Abilities.AbilityType;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.BasicGameState;
@@ -11,6 +12,7 @@ public class GameScene extends BasicGameState {
     private int stateId;
     private boolean useFirstAbility;
     private boolean useSecondAbility;
+    private AbilityManager abilityManager;
 
 
     public GameScene(int stateId) {
@@ -27,6 +29,7 @@ public class GameScene extends BasicGameState {
         this.useFirstAbility = false;
         this.useSecondAbility = false;
 
+
     }
 
     @Override
@@ -35,20 +38,8 @@ public class GameScene extends BasicGameState {
         GameVariables.backgroundImg.draw();
         GameVariables.drawAbilityBtns(graphics,GameVariables.currentPlayer);
 
-        if (this.useFirstAbility) {
-                handleAbility(GameVariables.currentPlayer.getFirstAbility());
 
-        }
-
-        if (this.useSecondAbility) {
-
-                handleAbility(GameVariables.currentPlayer.getSecondAbility());
-
-        }
-
-
-
-
+        abilityManager.renderAbilities();
 
         GameVariables.player1.setXY(200,500);
         GameVariables.player1.draw();
@@ -70,8 +61,14 @@ public class GameScene extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
 
+        if (this.abilityManager == null && GameVariables.currentPlayer != null && GameVariables.opponentPlayer != null) {
+            this.abilityManager = new AbilityManager(GameVariables.currentPlayer, GameVariables.opponentPlayer);
+        }
+
+        abilityManager.updateAbilities();
 
     }
+
 
     public void mouseClicked(int button, int x, int y, int clickCount) {
         for (Content content : GameVariables.contents) {
@@ -84,123 +81,15 @@ public class GameScene extends BasicGameState {
         }
     }
 
+
    public void keyPressed(int key, char c) {
         if (key == Input.KEY_1) {
-            if (GameVariables.currentPlayer == GameVariables.player1) {
-                GameVariables.currentPlayer.getFirstAbility().setX(GameVariables.currentPlayer.getX() + GameVariables.currentPlayer.getWidth() - 100);
-                GameVariables.currentPlayer.getFirstAbility().setY(GameVariables.currentPlayer.getY() + GameVariables.currentPlayer.getHeight() - 320);
-            }else{
-                GameVariables.currentPlayer.getFirstAbility().setX(GameVariables.currentPlayer.getX() - GameVariables.currentPlayer.getWidth() + 200);
-                GameVariables.currentPlayer.getFirstAbility().setY(GameVariables.currentPlayer.getY() + GameVariables.currentPlayer.getHeight() - 320);
-            }
-
-            this.useFirstAbility = true;
+           abilityManager.ManageAbility(AbilityType.FIRST);
 
         }
         if (key == Input.KEY_2){
-            if (GameVariables.currentPlayer == GameVariables.player1) {
-                GameVariables.currentPlayer.getSecondAbility().setX(GameVariables.currentPlayer.getX() + GameVariables.currentPlayer.getWidth() - 100);
-                GameVariables.currentPlayer.getSecondAbility().setY(GameVariables.currentPlayer.getY() + GameVariables.currentPlayer.getHeight() -320);
-            }else{
-                GameVariables.currentPlayer.getSecondAbility().setX(GameVariables.currentPlayer.getX() - GameVariables.currentPlayer.getWidth() + 200);
-                GameVariables.currentPlayer.getSecondAbility().setY(GameVariables.currentPlayer.getY() + GameVariables.currentPlayer.getHeight() -320);
-            }
-            this.useSecondAbility = true;
+            abilityManager.ManageAbility(AbilityType.SECOND);
         }
-   }
-
-
-   public void changePLayers(){
-       if (GameVariables.currentPlayer == GameVariables.player1) {
-           GameVariables.currentPlayer = GameVariables.player2;
-           GameVariables.opponentPlayer = GameVariables.player1;
-       } else if (GameVariables.currentPlayer == GameVariables.player2) {
-           GameVariables.currentPlayer = GameVariables.player1;
-           GameVariables.opponentPlayer = GameVariables.player2;
-       }
-   }
-
-   public void handleAbility(Ability ability){
-
-       if(!ability.isDrawable()) {
-
-           if (GameVariables.currentPlayer.getNerfDuration() > 0){
-               GameVariables.currentPlayer.setNerfDuration(GameVariables.currentPlayer.getNerfDuration() - 1);
-               System.out.println(GameVariables.currentPlayer.getNerfDuration());
-           }
-
-           if (GameVariables.currentPlayer.getNerfDuration() == 0){
-               GameVariables.currentPlayer.setFrozen(false);
-
-           }
-
-           ability.ActivateAbility(GameVariables.currentPlayer, GameVariables.opponentPlayer);
-           if (ability == GameVariables.currentPlayer.getFirstAbility()) {
-               this.useFirstAbility = false;
-           } else {
-               this.useSecondAbility = false;
-           }
-
-           if(ability.getAbilityCooldown() > 0){
-               ability.setAbilityCooldown(ability.getAbilityCooldown() - 1);
-               System.out.println(ability.getAbilityCooldown());
-               return;
-           }else if (ability.getAbilityCooldown() == 0){
-               ability.setDrawable(true);
-           }
-
-        changePLayers();
-           return;
-       }
-
-       if(ability.getAbilityCooldown() > 0){
-               ability.setDrawable(false);
-               return;
-       }
-
-
-
-           ability.draw();
-           ability.move();
-
-
-           if (GameVariables.currentPlayer == GameVariables.player2){
-               ability.setAbilityImg(ability.getAbilityImg().getFlippedCopy(true,false));
-
-           }
-
-
-           if (GameVariables.isCollidingAbilityCharacter(GameVariables.currentPlayer.getFirstAbility(),GameVariables.opponentPlayer) && GameVariables.currentPlayer.getFirstAbility().isDrawable()){
-                GameVariables.currentPlayer.getFirstAbility().ActivateAbility(GameVariables.currentPlayer,GameVariables.opponentPlayer);
-               if (GameVariables.currentPlayer.getNerfDuration() > 0){
-                   GameVariables.currentPlayer.setNerfDuration(GameVariables.currentPlayer.getNerfDuration() - 1);
-               }
-
-               if (GameVariables.currentPlayer.getNerfDuration() == 0){
-                   GameVariables.currentPlayer.setFrozen(false);
-
-               }
-
-               changePLayers();
-               this.useFirstAbility = false;
-
-           }else if (GameVariables.isCollidingAbilityCharacter(GameVariables.currentPlayer.getSecondAbility(),GameVariables.opponentPlayer) && GameVariables.currentPlayer.getSecondAbility().isDrawable()){
-               GameVariables.currentPlayer.getSecondAbility().ActivateAbility(GameVariables.currentPlayer,GameVariables.opponentPlayer);
-
-               if (GameVariables.currentPlayer.getNerfDuration() > 0){
-                   GameVariables.currentPlayer.setNerfDuration(GameVariables.currentPlayer.getNerfDuration() - 1);
-                   System.out.println(GameVariables.currentPlayer.getNerfDuration());
-               }
-
-               if (GameVariables.currentPlayer.getNerfDuration() == 0){
-                   GameVariables.currentPlayer.setFrozen(false);
-
-               }
-
-               changePLayers();
-               this.useSecondAbility = false;
-           }
-
    }
 
 }

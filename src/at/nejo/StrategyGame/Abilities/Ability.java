@@ -73,6 +73,8 @@ public abstract class Ability  {
         return this.height;
     }
 
+
+
     public int getAbilityCooldown() {
         return this.abilityCooldown;
     }

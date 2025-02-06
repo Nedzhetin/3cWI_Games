@@ -6,15 +6,16 @@ public class SnowBallAbility extends Ability{
 
     public SnowBallAbility(int abilityDamage, String imgUrl, boolean drawAbility) {
         super(abilityDamage, imgUrl, drawAbility, 0);
+        if (GameVariables.currentPlayer == GameVariables.player2){
+            setAbilityImg(getAbilityImg().getFlippedCopy(true, false));
+
+        }
     }
 
 
     @Override
     public void draw() {
-        if (GameVariables.currentPlayer == GameVariables.player2){
-            setAbilityImg(getAbilityImg().getFlippedCopy(true, false));
 
-        }
         getAbilityImg().draw(getX(),getY());
 
     }
