@@ -30,11 +30,11 @@ public class GameVariables {
 
 
     public static final Character fireMan = new Character("Pablo",100, Character.TYPE.FIRE,"testdata/fireCharacterImg.png",50,1100,fireBallAbility,healAbility);
-    public static final Character iceMan = new Character("Cryo",120, Character.TYPE.ICE,"testdata/iceCharacterImg.png",350,1100,snowBallAbility,healAbility);
+    public static final Character iceMan = new Character("Cryo",120, Character.TYPE.ICE,"testdata/waterCharacterImg.png",350,1100,snowBallAbility,healAbility);
     public static final Character earthMan = new Character("Muhammand",150,Character.TYPE.EARTH,"testdata/earthManImg.png",650,1100,fireBallAbility,fireBallAbility);
     public static final Character lightingMan = new Character("Cid",80,Character.TYPE.LIGHTNING,"testdata/lightingCharacterImg.png",950,1100,fireBallAbility,fireBallAbility);
     public static final Character waterMan = new Character("Muhammad",90,Character.TYPE.WATER,"testdata/waterCharacterImg.png",1250,1100,fireBallAbility,fireBallAbility);
-    public static final Character windMan = new Character("Mehmet",110,Character.TYPE.WIND,"testdata/windCharacterImg.png",1550,1100,fireBallAbility,fireBallAbility);
+   // public static final Character windMan = new Character("Mehmet",110,Character.TYPE.WIND,"testdata/windCharacterImg.png",1550,1100,fireBallAbility,fireBallAbility);
 
 
 
