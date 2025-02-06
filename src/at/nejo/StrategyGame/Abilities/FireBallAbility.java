@@ -5,7 +5,7 @@ import at.nejo.StrategyGame.Character;
 
 public class FireBallAbility extends Ability{
     public FireBallAbility(int abilityDamage, String imgUrl, boolean drawAbility) {
-        super(abilityDamage, imgUrl, drawAbility);
+        super(abilityDamage, imgUrl, drawAbility, 0);
     }
 
     @Override

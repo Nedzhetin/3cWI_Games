@@ -25,15 +25,15 @@ public class GameVariables {
      public static FireBallAbility fireBallAbility = new FireBallAbility(10,"testdata/fireBallAbilityImg.png",true);
      public static HealAbility healAbility = new HealAbility(-20,"testdata/healAbilityImg.png",false);
      public static SnowBallAbility snowBallAbility = new SnowBallAbility(5,"testdata/snowBallAbilityImg.png",true);
-     public static EarthWallAbility earthWallAbility = new EarthWallAbility(0,"testdata/healAbilityImg.png",true);
+     public static EarthWallAbility earthWallAbility = new EarthWallAbility(0,"testdata/ben10.png",false);
 
 
 
-    public static final Character fireMan = new Character("Pablo",100, Character.TYPE.FIRE,"testdata/fireCharacterImg.png",50,1100,fireBallAbility,healAbility);
-    public static final Character iceMan = new Character("Cryo",120, Character.TYPE.ICE,"testdata/waterCharacterImg.png",350,1100,snowBallAbility,healAbility);
-    public static final Character earthMan = new Character("Muhammand",150,Character.TYPE.EARTH,"testdata/earthManImg.png",650,1100,fireBallAbility,fireBallAbility);
-    public static final Character lightingMan = new Character("Cid",80,Character.TYPE.LIGHTNING,"testdata/lightingCharacterImg.png",950,1100,fireBallAbility,fireBallAbility);
-    public static final Character waterMan = new Character("Muhammad",90,Character.TYPE.WATER,"testdata/waterCharacterImg.png",1250,1100,fireBallAbility,fireBallAbility);
+    public static final Character fireMan = new Character("Pablo",100, Character.TYPE.FIRE,"testdata/fireCharacterImg.png",30,720,fireBallAbility,healAbility);
+    public static final Character iceMan = new Character("Cryo",120, Character.TYPE.ICE,"testdata/waterCharacterImg.png",530,720,snowBallAbility,fireBallAbility);
+    public static final Character earthMan = new Character("Muhammand",150,Character.TYPE.EARTH,"testdata/earthManImg.png",1030,720,fireBallAbility,fireBallAbility);
+    public static final Character lightingMan = new Character("Cid",80,Character.TYPE.LIGHTNING,"testdata/lightingCharacterImg.png",1530,720,fireBallAbility,fireBallAbility);
+   // public static final Character waterMan = new Character("Muhammad",90,Character.TYPE.WATER,"testdata/waterCharacterImg.png",1250,1100,fireBallAbility,fireBallAbility);
    // public static final Character windMan = new Character("Mehmet",110,Character.TYPE.WIND,"testdata/windCharacterImg.png",1550,1100,fireBallAbility,fireBallAbility);
 
 
@@ -49,8 +49,7 @@ public class GameVariables {
         contents.add(iceMan);
         contents.add(earthMan);
         contents.add(lightingMan);
-        contents.add(waterMan);
-        contents.add(windMan);
+
 
         try {
             backgroundImg = new Image("testdata/backgroundImg_strategyGame.jpg");
@@ -80,9 +79,13 @@ public class GameVariables {
                 a.getY() + a.getHeight() > b.getY();
     }
 
-    public static void drawAbilityBtns(Graphics graphics) {
+    public static void drawAbilityBtns(Graphics graphics,Character currentPlayer) {
         graphics.setColor(graphics.getColor().black);
         graphics.setLineWidth(5);
+
+        if (currentPlayer.getFirstAbility().getAbilityCooldown() > 0 || currentPlayer.getSecondAbility().getAbilityCooldown() > 0) {
+            font.drawString(800, 100, "Ability on cooldown");
+        }
 
         graphics.drawRect(340,1050,120,120);
         GameVariables.player1.getFirstAbility().getAbilityImg().draw(340,1050,120,120);

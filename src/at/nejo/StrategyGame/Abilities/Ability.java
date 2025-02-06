@@ -1,8 +1,5 @@
 package at.nejo.StrategyGame.Abilities;
 
-import at.nejo.StrategyGame.Content;
-import at.nejo.StrategyGame.GameVariables;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import at.nejo.StrategyGame.Character;
@@ -13,12 +10,14 @@ public abstract class Ability  {
     private float y;
     private int width = 300;
     private int height = 300;
-    private boolean drawAbility;
+    private boolean isDrawable;
     private Image abilityImg;
+    private int abilityCooldown;
 
-    public Ability(int abilityDamage,String imgUrl, boolean drawAbility) {
+    public Ability(int abilityDamage, String imgUrl, boolean isDrawable, int abilityCooldown) {
         this.abilityDamage = abilityDamage;
-        this.drawAbility = drawAbility;
+        this.isDrawable = isDrawable;
+        this.abilityCooldown = abilityCooldown;
 
         if(imgUrl != ""){
 
@@ -62,13 +61,24 @@ public abstract class Ability  {
         return this.width;
     }
 
-    public boolean isDrawAbility() {
-        return this.drawAbility;
+    public boolean isDrawable() {
+        return this.isDrawable;
     }
 
+    public void setDrawable(boolean drawable) {
+        this.isDrawable = drawable;
+    }
 
     public int getHeight() {
         return this.height;
+    }
+
+    public int getAbilityCooldown() {
+        return this.abilityCooldown;
+    }
+
+    public void setAbilityCooldown(int abilityCooldown) {
+        this.abilityCooldown = abilityCooldown;
     }
 
     public void setX(float x) {

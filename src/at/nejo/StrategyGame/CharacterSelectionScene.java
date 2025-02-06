@@ -10,11 +10,6 @@ import java.util.Map;
 public class CharacterSelectionScene extends BasicGameState {
     private final int stateId;
 
-
-
-
-
-
     private Image arrowImg;
     private boolean drawArrowImg = false;
     Map<String, Float> arrowPosition = new HashMap<>();
@@ -57,9 +52,9 @@ public class CharacterSelectionScene extends BasicGameState {
         }
 
         if (GameVariables.player1 == null){
-            GameVariables.font.drawString(700,650,"Player 1 choose your Character");
+            GameVariables.font.drawString(700,350,"Player 1 choose your Character");
         }else if(GameVariables.player2 == null) {
-            GameVariables.font.drawString(700,650,"Player 2 choose your Character");
+            GameVariables.font.drawString(700,350,"Player 2 choose your Character");
         }
     }
 
@@ -102,7 +97,7 @@ public class CharacterSelectionScene extends BasicGameState {
         for (Content content : GameVariables.contents) {
             if(content instanceof Character) {
                 if (GameVariables.isColliding(oldx,oldy,content)) {
-                    arrowPosition.put("x",content.getX() + 100);
+                    arrowPosition.put("x",content.getX() + 180);
                     arrowPosition.put("y",content.getY() - 100);
                     drawArrowImg = true;
                     break;

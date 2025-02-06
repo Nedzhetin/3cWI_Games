@@ -1,11 +1,11 @@
 package at.nejo.StrategyGame.Abilities;
 import at.nejo.StrategyGame.Character;
 import at.nejo.StrategyGame.GameVariables;
-import org.newdawn.slick.Image;
 
 public class SnowBallAbility extends Ability{
+
     public SnowBallAbility(int abilityDamage, String imgUrl, boolean drawAbility) {
-        super(abilityDamage, imgUrl, drawAbility);
+        super(abilityDamage, imgUrl, drawAbility, 0);
     }
 
 
@@ -20,11 +20,12 @@ public class SnowBallAbility extends Ability{
     }
     @Override
     public void ActivateAbility(Character currentPlayer, Character opponentPlayer) {
-
-            opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
-            opponentPlayer.setFrozen(true);
-            opponentPlayer.setNerfDuration(2);
-
+                if (this.getAbilityCooldown() == 0){
+                    opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
+                    opponentPlayer.setFrozen(true);
+                    opponentPlayer.setNerfDuration(2);
+                    this.setAbilityCooldown(3);
+                }
 
     }
 

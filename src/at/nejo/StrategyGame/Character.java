@@ -9,8 +9,8 @@ public class Character implements Content {
     private float y;
     private final String name;
     private int health;
-    private final int width = 300;
-    private final int height = 300;
+    private final int width = 450;
+    private final int height = 450;
     public enum TYPE {FIRE,ICE,EARTH,WIND,LIGHTNING,WATER}
     private TYPE type;
     private boolean isFrozen;
@@ -56,12 +56,18 @@ public class Character implements Content {
         }
     }
 
-    public void drawHealthBar(Graphics graphics) {
-        graphics.setColor(Color.black);
+    public void drawHealth(Graphics graphics) {
 
-        graphics.drawRect(this.x +120,this.y - this.height /2,this.width,25);
-        graphics.setColor(Color.green);
-        graphics.fillRect(this.x + 122,this.y - this.height /2 + 2,this.health,23);
+        if (this.health > 60){
+            GameVariables.font.drawString(this.x + this.width/2, this.y - this.height/2,  ""+ this.health,Color.green);
+        }else if (this.health > 30){
+            GameVariables.font.drawString(this.x + this.width/2, this.y - this.height/2,  ""+ this.health,Color.yellow);
+        }else{
+            GameVariables.font.drawString(this.x + this.width/2, this.y - this.height/2,  ""+ this.health,Color.red);
+        }
+
+
+
     }
 
     @Override
