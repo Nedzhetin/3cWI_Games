@@ -10,19 +10,24 @@ public class FireBallAbility extends Ability{
 
     @Override
     public void draw() {
-        if (GameVariables.currentPlayer == GameVariables.player2){
-            setAbilityImg(getAbilityImg().getFlippedCopy(true, false));
+        if (GameVariables.currentPlayer.isFrozen()){
+            return;
+    }else{
+            if (GameVariables.currentPlayer == GameVariables.player2){
+                setAbilityImg(getAbilityImg().getFlippedCopy(true, false));
 
+            }
+            getAbilityImg().draw(getX(),getY());
         }
-        getAbilityImg().draw(getX(),getY());
-
     }
 
     @Override
     public void ActivateAbility(Character currentPlayer, Character opponentPlayer) {
-        if (currentPlayer.getNerfDuration() == 0){
+            if (currentPlayer.isFrozen()){
+                return;
+            }
+
             opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
-        }
     }
 
 
@@ -31,16 +36,13 @@ public class FireBallAbility extends Ability{
     @Override
     public void move() {
 
-
             if(GameVariables.currentPlayer == GameVariables.player1){
                 setX(getX() + 1);
 
             }else{
                 setX(getX() -1);
 
+            }
+
         }
-    }
-
-
-
 }

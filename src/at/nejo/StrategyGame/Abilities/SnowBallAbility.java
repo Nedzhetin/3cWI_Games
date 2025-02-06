@@ -20,11 +20,11 @@ public class SnowBallAbility extends Ability{
     }
     @Override
     public void ActivateAbility(Character currentPlayer, Character opponentPlayer) {
-        if (currentPlayer.getNerfDuration() == 0){
+
             opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
             opponentPlayer.setFrozen(true);
-            opponentPlayer.setNerfDuration(1);
-        }
+            opponentPlayer.setNerfDuration(2);
+
 
     }
 

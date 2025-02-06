@@ -47,16 +47,12 @@ public class Character implements Content {
            this.characterImg = this.characterImg.getScaledCopy(500,500);
         }
 
-        this.characterImg.draw(this.x, this.y);
 
-        if (GameVariables.player1 != null && GameVariables.player2 != null) {
+        if (isFrozen){
+            GameVariables.frozenImg.draw(this.x,this.y);
+        }else{
+            this.characterImg.draw(this.x, this.y);
 
-        }
-
-        if (isFrozen && nerfDuration > 0){
-            this.setCharacterImg(GameVariables.frozenImg);
-        }else {
-    //  hier weiter programieren
         }
     }
 

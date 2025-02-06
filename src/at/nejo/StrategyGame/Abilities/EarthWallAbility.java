@@ -1,8 +1,9 @@
 package at.nejo.StrategyGame.Abilities;
+
 import at.nejo.StrategyGame.Character;
 
-public class HealAbility extends Ability{
-    public HealAbility(int abilityDamage, String imgUrl, boolean drawAbility) {
+public class EarthWallAbility extends Ability{
+    public EarthWallAbility(int abilityDamage, String imgUrl, boolean drawAbility) {
         super(abilityDamage, imgUrl, drawAbility);
     }
 
@@ -13,14 +14,8 @@ public class HealAbility extends Ability{
 
     @Override
     public void ActivateAbility(Character currentPlayer, Character opponentPlayer) {
-        if (currentPlayer.isFrozen()){
-            return;
-        }
-            currentPlayer.setHealth(currentPlayer.getHealth() - this.getAbilityDamage());
 
     }
-
-
 
     @Override
     public void move() {

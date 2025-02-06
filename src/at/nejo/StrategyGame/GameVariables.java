@@ -1,9 +1,6 @@
 package at.nejo.StrategyGame;
 
-import at.nejo.StrategyGame.Abilities.Ability;
-import at.nejo.StrategyGame.Abilities.FireBallAbility;
-import at.nejo.StrategyGame.Abilities.HealAbility;
-import at.nejo.StrategyGame.Abilities.SnowBallAbility;
+import at.nejo.StrategyGame.Abilities.*;
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -28,9 +25,7 @@ public class GameVariables {
      public static FireBallAbility fireBallAbility = new FireBallAbility(10,"testdata/fireBallAbilityImg.png",true);
      public static HealAbility healAbility = new HealAbility(-20,"testdata/healAbilityImg.png",false);
      public static SnowBallAbility snowBallAbility = new SnowBallAbility(5,"testdata/snowBallAbilityImg.png",true);
-
-
-
+     public static EarthWallAbility earthWallAbility = new EarthWallAbility(0,"testdata/healAbilityImg.png",true);
 
 
 
