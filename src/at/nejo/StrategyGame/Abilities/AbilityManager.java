@@ -31,17 +31,26 @@ public class AbilityManager {
         if (!ability.isDrawable()){
             if (ability.getAbilityDamage() < 0){
                 ability.ActivateAbility(currentPlayer, opponentPlayer);
+                handleNerfEffects(ability);// because heal is not drawable but it still should the check the nerfs
                 changePlayers();
+
             }
+
+            handleNerfEffects(ability);
            return; // Do nothing if the ability is not drawable
         }
+
+
 
         if (currentPlayer == GameVariables.player2) {
             ability.setAbilityImg(ability.getAbilityImg().getFlippedCopy(true, false));
         }
 
+
         this.activeAbilities.add(ability);
         positionAbility(ability);
+        handleNerfEffects(ability);
+
 
     }
 
@@ -67,17 +76,45 @@ public class AbilityManager {
         // Update the reference inside AbilityManager
         this.currentPlayer = GameVariables.currentPlayer;
         this.opponentPlayer = GameVariables.opponentPlayer;
+
+        // Check if the player is still frozen
+        if (this.currentPlayer.getNerfDuration() == 0) {
+            this.currentPlayer.setFrozen(false);
+        }
+
+        handleAbilityCooldown(currentPlayer.getFirstAbility());
+        handleAbilityCooldown(currentPlayer.getSecondAbility());
+
+    }
+
+    private void  handleAbilityCooldown(Ability ability) {
+        if (ability.getAbilityCooldown() > 0) {
+            ability.setAbilityCooldown(ability.getAbilityCooldown() - 1);
+        }
+        if (ability.getAbilityCooldown() == 0) {
+            ability.setDrawable(true);
+        }
     }
 
 
-    private void handleNerfEffects() {
+    private void handleNerfEffects(Ability ability) {
         if (currentPlayer.getNerfDuration() > 0) {
             currentPlayer.setNerfDuration(currentPlayer.getNerfDuration() - 1);
+            System.out.println("Nerf duration: " + currentPlayer.getNerfDuration());
+            return;
         }
 
-        if (currentPlayer.getNerfDuration() == 0) {
-            currentPlayer.setFrozen(false);
+        if (ability.getAbilityCooldown() > 0) {
+            System.out.println("Ability cooldown: " + ability.getAbilityCooldown());
         }
+
+        if (ability.getAbilityCooldown() == 0) {
+            ability.setDrawable(true);
+        }
+
+
+
+       // if the player is frozen is being checked in the ChangePlayers method
     }
 
     private void positionAbility(Ability ability) {
@@ -89,5 +126,6 @@ public class AbilityManager {
         ability.setY(currentPlayer.getY() + currentPlayer.getHeight() - 320);
 
     }
+
 
 }

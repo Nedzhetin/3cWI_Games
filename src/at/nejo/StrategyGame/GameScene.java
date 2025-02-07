@@ -10,8 +10,6 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GameScene extends BasicGameState {
 
     private int stateId;
-    private boolean useFirstAbility;
-    private boolean useSecondAbility;
     private AbilityManager abilityManager;
 
 
@@ -26,9 +24,6 @@ public class GameScene extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        this.useFirstAbility = false;
-        this.useSecondAbility = false;
-
 
     }
 
