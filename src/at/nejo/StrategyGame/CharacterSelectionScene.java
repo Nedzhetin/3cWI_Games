@@ -64,10 +64,11 @@ public class CharacterSelectionScene extends BasicGameState {
             stateBasedGame.enterState(Main.GAME_SCENE);
             GameVariables.player1.setBig(true);
             GameVariables.player2.setBig(true);
-            GameVariables.scaledImgOneP1 = GameVariables.player1.getFirstAbility().getAbilityImg();
-            GameVariables.scaledImgTwoP1 = GameVariables.player1.getSecondAbility().getAbilityImg();
-            GameVariables.scaledImgOneP2 = GameVariables.player2.getFirstAbility().getAbilityImg();
-            GameVariables.scaledImgTwoP2 = GameVariables.player2.getSecondAbility().getAbilityImg();
+            GameVariables.player1.setScaledAbilityImgOne( GameVariables.player1.getFirstAbility().getAbilityImg());
+            GameVariables.player1.setScaledAbilityImgTwo( GameVariables.player1.getSecondAbility().getAbilityImg());
+            GameVariables.player2.setScaledAbilityImgOne( GameVariables.player2.getFirstAbility().getAbilityImg());
+            GameVariables.player2.setScaledAbilityImgTwo( GameVariables.player2.getSecondAbility().getAbilityImg());
+
 
         }
     }

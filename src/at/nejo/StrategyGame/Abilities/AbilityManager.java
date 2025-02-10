@@ -61,6 +61,10 @@ public class AbilityManager {
 
             // Check if it collides with the opponent
             if (GameVariables.isCollidingAbilityCharacter(ability, GameVariables.opponentPlayer)) {
+
+                handleAbilityCooldown(currentPlayer.getFirstAbility());
+                handleAbilityCooldown(currentPlayer.getSecondAbility());
+
                 ability.ActivateAbility(GameVariables.currentPlayer, GameVariables.opponentPlayer);
                 activeAbilities.remove(i); // Remove ability after impact
                 changePlayers();
@@ -82,8 +86,7 @@ public class AbilityManager {
             this.currentPlayer.setFrozen(false);
         }
 
-        handleAbilityCooldown(currentPlayer.getFirstAbility());
-        handleAbilityCooldown(currentPlayer.getSecondAbility());
+
 
     }
 

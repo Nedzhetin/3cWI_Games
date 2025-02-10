@@ -1,6 +1,7 @@
 package at.nejo.StrategyGame;
 
 import at.nejo.StrategyGame.Abilities.Ability;
+import at.nejo.StrategyGame.Abilities.AbilityType;
 import org.newdawn.slick.*;
 
 public class Character implements Content {
@@ -19,6 +20,10 @@ public class Character implements Content {
     private boolean isBig;
     private Ability firstAbility;
     private Ability secondAbility;
+
+    public Image scaledAbilityImgOne;
+    public Image scaledAbilityImgTwo;
+
 
 
     public Character(String name,int health,TYPE type,String imgUrl,float x, float y,Ability firstAbility,Ability secondAbility) {
@@ -148,4 +153,52 @@ public class Character implements Content {
     public void setNerfDuration(int nerfDuration) {
         this.nerfDuration = nerfDuration;
     }
+
+    public void setScaledAbilityImgOne(Image scaledAbilityImgOne) {
+        this.scaledAbilityImgOne = scaledAbilityImgOne;
+    }
+
+    public void setScaledAbilityImgTwo(Image scaledAbilityImgTwo) {
+        this.scaledAbilityImgTwo = scaledAbilityImgTwo;
+    }
+
+
+
+    public void drawAbilityBtns(Graphics graphics, Character currentPlayer, Character opponentPlayer) {
+        graphics.setLineWidth(5);
+
+        // First Ability
+        if (this.getFirstAbility().getAbilityCooldown() > 0) {
+
+            graphics.setColor(new Color(0, 0, 0, 100));
+            graphics.fillRect(this.x + 150, 1050, 120, 120);
+
+            GameVariables.font.drawString(this.x + 190, 1080, "" + this.getFirstAbility().getAbilityCooldown());
+        } else {
+            // Draw the first ability image if not on cooldown
+            this.scaledAbilityImgOne.draw(this.x + 150, 1050, 120, 120);
+        }
+
+        // Second Ability
+        if (this.getSecondAbility().getAbilityCooldown() > 0) {
+
+            graphics.setColor(new Color(0, 0, 0, 100));
+            graphics.fillRect(this.x + 300, 1050, 120, 120);
+
+            GameVariables.font.drawString(this.x + 340, 1080, "" + this.getSecondAbility().getAbilityCooldown());
+        } else {
+            // Draw the second ability image if not on cooldown
+            this.scaledAbilityImgTwo.draw(this.x + 300, 1050, 120, 120);
+        }
+
+        // Draw border and keybind numbers
+        graphics.setColor(Color.black);
+
+        graphics.drawRect(this.x + 150, 1050, 120, 120);
+        GameVariables.font2.drawString(this.x + 155, 1135, "1");
+
+        graphics.drawRect(this.x + 300, 1050, 120, 120);
+        GameVariables.font2.drawString(this.x + 305, 1135, "2");
+    }
+
 }

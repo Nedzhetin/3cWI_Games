@@ -31,7 +31,8 @@ public class GameScene extends BasicGameState {
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
 
         GameVariables.backgroundImg.draw();
-        GameVariables.drawAbilityBtns(graphics,GameVariables.currentPlayer);
+        GameVariables.player1.drawAbilityBtns(graphics,GameVariables.currentPlayer, GameVariables.opponentPlayer);
+        GameVariables.player2.drawAbilityBtns(graphics,GameVariables.currentPlayer, GameVariables.opponentPlayer);
 
 
         abilityManager.renderAbilities();

@@ -16,10 +16,6 @@ public class GameVariables {
      public static AngelCodeFont font;
      public static AngelCodeFont font2;
 
-     public static Image scaledImgOneP1;
-     public static Image scaledImgTwoP1;
-     public static Image scaledImgOneP2;
-     public static Image scaledImgTwoP2;
 
      public static Character player1 = null;
      public static Character player2 = null;
@@ -36,7 +32,7 @@ public class GameVariables {
 
     public static final Character fireMan = new Character("Pablo",100, Character.TYPE.FIRE,"testdata/fireCharacterImg.png",30,720,fireBallAbility,healAbility);
     public static final Character iceMan = new Character("Cryo",120, Character.TYPE.ICE,"testdata/waterCharacterImg.png",530,720,snowBallAbility,fireBallAbility);
-    public static final Character earthMan = new Character("Muhammand",150,Character.TYPE.EARTH,"testdata/earthManImg.png",1030,720,fireBallAbility,healAbility);
+    public static final Character earthMan = new Character("Muhammand",150,Character.TYPE.EARTH,"testdata/earthManImg.png",1030,720,fireBallAbility,snowBallAbility);
     public static final Character lightingMan = new Character("Cid",80,Character.TYPE.LIGHTNING,"testdata/lightingCharacterImg.png",1530,720,fireBallAbility,fireBallAbility);
    // public static final Character waterMan = new Character("Muhammad",90,Character.TYPE.WATER,"testdata/waterCharacterImg.png",1250,1100,fireBallAbility,fireBallAbility);
    // public static final Character windMan = new Character("Mehmet",110,Character.TYPE.WIND,"testdata/windCharacterImg.png",1550,1100,fireBallAbility,fireBallAbility);
@@ -85,28 +81,6 @@ public class GameVariables {
                 a.getY() + a.getHeight() > b.getY();
     }
 
-    public static void drawAbilityBtns(Graphics graphics,Character currentPlayer) {
-        graphics.setColor(graphics.getColor().black);
-        graphics.setLineWidth(5);
 
-        if (currentPlayer.getFirstAbility().getAbilityCooldown() > 0 || currentPlayer.getSecondAbility().getAbilityCooldown() > 0) {
-            font.drawString(800, 100, "Ability on cooldown");
-        }
-
-        graphics.drawRect(340,1050,120,120);
-        scaledImgOneP1.draw(340,1050,120,120);
-        font2.drawString(350,1135,"1");
-        graphics.drawRect(490,1050,120,120);
-        scaledImgTwoP1.draw(490,1050,120,120);
-        font2.drawString(500,1135,"2");
-
-        graphics.drawRect(1320,1050,120,120);
-        scaledImgOneP2.draw(1320,1050,120,120);
-        font2.drawString(1330,1135,"1");
-        graphics.drawRect(1470,1050,120,120);
-        scaledImgTwoP2.draw(1470,1050,120,120);
-        font2.drawString(1480,1135,"2");
-
-    }
 
 }
