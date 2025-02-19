@@ -68,6 +68,8 @@ public class CharacterSelectionScene extends BasicGameState {
             GameVariables.player1.setScaledAbilityImgTwo( GameVariables.player1.getSecondAbility().getAbilityImg());
             GameVariables.player2.setScaledAbilityImgOne( GameVariables.player2.getFirstAbility().getAbilityImg());
             GameVariables.player2.setScaledAbilityImgTwo( GameVariables.player2.getSecondAbility().getAbilityImg());
+            GameVariables.player2.getFirstAbility().setAbilityImg(GameVariables.player2.getFirstAbility().getAbilityImg().getFlippedCopy(true, false));
+            GameVariables.player2.getSecondAbility().setAbilityImg(GameVariables.player2.getSecondAbility().getAbilityImg().getFlippedCopy(true, false));
 
 
         }

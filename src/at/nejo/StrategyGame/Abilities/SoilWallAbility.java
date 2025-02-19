@@ -2,13 +2,14 @@ package at.nejo.StrategyGame.Abilities;
 
 import at.nejo.StrategyGame.Character;
 
-public class EarthWallAbility extends Ability{
-    public EarthWallAbility(int abilityDamage, String imgUrl, boolean drawAbility) {
+public class SoilWallAbility extends Ability{
+    public SoilWallAbility(int abilityDamage, String imgUrl, boolean drawAbility) {
         super(abilityDamage, imgUrl, drawAbility,0);
     }
 
     @Override
     public void draw() {
+        getAbilityImg().draw(getX(),getY());
 
     }
 

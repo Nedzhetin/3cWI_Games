@@ -36,6 +36,7 @@ public class AbilityManager {
                 handleAbilityCooldown(ability);
                 ability.ActivateAbility(currentPlayer, opponentPlayer);
                 handleNerfEffects(ability);// because heal is not drawable but it still should the check the nerfs
+                this.canUseAbility = true;
                 changePlayers();
 
             }
@@ -44,11 +45,6 @@ public class AbilityManager {
            return; // Do nothing if the ability is not drawable
         }
 
-
-
-        if (currentPlayer == GameVariables.player2) {
-            ability.setAbilityImg(ability.getAbilityImg().getFlippedCopy(true, false));
-        }
 
 
         this.activeAbilities.add(ability);

@@ -2,7 +2,6 @@ package at.nejo.StrategyGame;
 
 import at.nejo.StrategyGame.Abilities.*;
 import org.newdawn.slick.AngelCodeFont;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -26,13 +25,14 @@ public class GameVariables {
      public static FireBallAbility fireBallAbility = new FireBallAbility(10,"testdata/fireBallAbilityImg.png",true);
      public static HealAbility healAbility = new HealAbility(-20,"testdata/healAbilityImg.png",false);
      public static SnowBallAbility snowBallAbility = new SnowBallAbility(5,"testdata/snowBallAbilityImg.png",true);
-     public static EarthWallAbility earthWallAbility = new EarthWallAbility(0,"testdata/ben10.png",false);
+     public static SoilWallAbility soilWallAbility = new SoilWallAbility(0,"testdata/soilWallAbilityImg.png",false);
+     public static WaterWaveAbility waterWaveAbility = new WaterWaveAbility(15,"testdata/waterWaveImg.png",true);
 
 
 
     public static final Character fireMan = new Character("Pablo",100, Character.TYPE.FIRE,"testdata/fireCharacterImg.png",30,720,fireBallAbility,healAbility);
-    public static final Character iceMan = new Character("Cryo",120, Character.TYPE.ICE,"testdata/waterCharacterImg.png",530,720,snowBallAbility,fireBallAbility);
-    public static final Character earthMan = new Character("Muhammand",150,Character.TYPE.EARTH,"testdata/earthManImg.png",1030,720,fireBallAbility,snowBallAbility);
+    public static final Character iceMan = new Character("Cryo",120, Character.TYPE.ICE,"testdata/waterCharacterImg.png",530,720,snowBallAbility,waterWaveAbility);
+    public static final Character earthMan = new Character("Muhammand",150,Character.TYPE.EARTH,"testdata/earthManImg.png",1030,720,soilWallAbility,snowBallAbility);
     public static final Character lightingMan = new Character("Cid",80,Character.TYPE.LIGHTNING,"testdata/lightingCharacterImg.png",1530,720,fireBallAbility,fireBallAbility);
    // public static final Character waterMan = new Character("Muhammad",90,Character.TYPE.WATER,"testdata/waterCharacterImg.png",1250,1100,fireBallAbility,fireBallAbility);
    // public static final Character windMan = new Character("Mehmet",110,Character.TYPE.WIND,"testdata/windCharacterImg.png",1550,1100,fireBallAbility,fireBallAbility);
