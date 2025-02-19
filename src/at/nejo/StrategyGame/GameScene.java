@@ -80,11 +80,18 @@ public class GameScene extends BasicGameState {
 
    public void keyPressed(int key, char c) {
         if (key == Input.KEY_1) {
-           abilityManager.ManageAbility(AbilityType.FIRST);
+            if (abilityManager.canUseAbility()){
+                abilityManager.ManageAbility(AbilityType.FIRST);
+                abilityManager.setCanUseAbility(false);
+            }
 
         }
         if (key == Input.KEY_2){
-            abilityManager.ManageAbility(AbilityType.SECOND);
+            if (abilityManager.canUseAbility()){
+                abilityManager.ManageAbility(AbilityType.SECOND);
+               abilityManager.setCanUseAbility(false);
+            }
+
         }
    }
 

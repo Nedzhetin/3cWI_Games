@@ -16,7 +16,11 @@ public class HealAbility extends Ability{
         if (currentPlayer.isFrozen()){
             return;
         }
+        if (this.getAbilityCooldown() > 0){
+            return;
+        }
             currentPlayer.setHealth(currentPlayer.getHealth() - this.getAbilityDamage());
+            setAbilityCooldown(4);
 
     }
 

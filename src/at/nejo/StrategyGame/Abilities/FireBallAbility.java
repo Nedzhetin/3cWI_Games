@@ -22,8 +22,12 @@ public class FireBallAbility extends Ability{
             if (currentPlayer.isFrozen()){
                 return;
             }
+            if (this.getAbilityCooldown() > 0){
+                return;
+            }
 
             opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
+
     }
 
 

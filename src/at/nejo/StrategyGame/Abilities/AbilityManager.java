@@ -10,11 +10,14 @@ public class AbilityManager {
     private Character currentPlayer;
     private Character opponentPlayer;
     private List<Ability> activeAbilities;
+    private boolean canUseAbility;
+
 
     public AbilityManager(Character currentPlayer, Character opponentPlayer) {
         this.currentPlayer = currentPlayer;
         this.opponentPlayer = opponentPlayer;
         this.activeAbilities = new ArrayList<Ability>();
+        this.canUseAbility = true;
     }
 
     public void renderAbilities() {
@@ -30,6 +33,7 @@ public class AbilityManager {
 
         if (!ability.isDrawable()){
             if (ability.getAbilityDamage() < 0){
+                handleAbilityCooldown(ability);
                 ability.ActivateAbility(currentPlayer, opponentPlayer);
                 handleNerfEffects(ability);// because heal is not drawable but it still should the check the nerfs
                 changePlayers();
@@ -64,6 +68,7 @@ public class AbilityManager {
 
                 handleAbilityCooldown(currentPlayer.getFirstAbility());
                 handleAbilityCooldown(currentPlayer.getSecondAbility());
+                this.canUseAbility = true;
 
                 ability.ActivateAbility(GameVariables.currentPlayer, GameVariables.opponentPlayer);
                 activeAbilities.remove(i); // Remove ability after impact
@@ -93,10 +98,13 @@ public class AbilityManager {
     private void  handleAbilityCooldown(Ability ability) {
         if (ability.getAbilityCooldown() > 0) {
             ability.setAbilityCooldown(ability.getAbilityCooldown() - 1);
+
         }
-        if (ability.getAbilityCooldown() == 0) {
+        if (ability.getAbilityCooldown() == 0 && ability.getAbilityDamage() > 0) {
+            // I have to check if it deals any damage because the heal should never be drawable
             ability.setDrawable(true);
         }
+
     }
 
 
@@ -128,6 +136,14 @@ public class AbilityManager {
         }
         ability.setY(currentPlayer.getY() + currentPlayer.getHeight() - 320);
 
+    }
+
+    public boolean canUseAbility() {
+        return canUseAbility;
+    }
+
+    public void setCanUseAbility(boolean canUseAbility) {
+        this.canUseAbility = canUseAbility;
     }
 
 
