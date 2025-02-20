@@ -25,7 +25,7 @@ public class GameVariables {
      public static FireBallAbility fireBallAbility = new FireBallAbility(10,"testdata/fireBallAbilityImg.png",true);
      public static HealAbility healAbility = new HealAbility(-20,"testdata/healAbilityImg.png",false);
      public static SnowBallAbility snowBallAbility = new SnowBallAbility(5,"testdata/snowBallAbilityImg.png",true);
-     public static SoilWallAbility soilWallAbility = new SoilWallAbility(0,"testdata/soilWallAbilityImg.png",false);
+     public static SoilWallAbility soilWallAbility = new SoilWallAbility(0,"testdata/soilWallAbilityImg.png",true);
      public static WaterWaveAbility waterWaveAbility = new WaterWaveAbility(15,"testdata/waterWaveImg.png",true);
 
 

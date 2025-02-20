@@ -32,6 +32,12 @@ public class AbilityManager {
         Ability ability = (abilityType == AbilityType.FIRST) ? currentPlayer.getFirstAbility() : currentPlayer.getSecondAbility();
 
         if (!ability.isDrawable()){
+
+            if(ability.getAbilityCooldown() > 0){
+                this.canUseAbility = true;
+                return;
+            }
+
             if (ability.getAbilityDamage() < 0){
                 handleAbilityCooldown(ability);
                 ability.ActivateAbility(currentPlayer, opponentPlayer);
@@ -41,16 +47,23 @@ public class AbilityManager {
 
             }
 
+
             handleNerfEffects(ability);
            return; // Do nothing if the ability is not drawable
         }
 
+        //for soilWall
+        if (ability.getAbilityDamage() == 0){
+            handleAbilityCooldown(ability);
+            System.out.println("SoilWall activated");
+            changePlayers();
+            this.canUseAbility = true;
+        }
 
 
         this.activeAbilities.add(ability);
         positionAbility(ability);
         handleNerfEffects(ability);
-
 
     }
 

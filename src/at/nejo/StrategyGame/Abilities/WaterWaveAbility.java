@@ -33,7 +33,10 @@ public class WaterWaveAbility extends Ability{
 
     }
 
+    @Override
+    public void activate(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager) {
 
+    }
 
 
     @Override
@@ -46,6 +49,5 @@ public class WaterWaveAbility extends Ability{
                 setX(getX() -1);
 
             }
-
         }
 }

@@ -24,6 +24,10 @@ public class HealAbility extends Ability{
 
     }
 
+    @Override
+    public void activate(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager) {
+
+    }
 
 
     @Override

@@ -42,6 +42,7 @@ public abstract class Ability  {
 
     }
 
+    public abstract void activate(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager);
 
 
     public abstract void move();
