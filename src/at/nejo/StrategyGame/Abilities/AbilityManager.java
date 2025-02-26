@@ -31,41 +31,13 @@ public class AbilityManager {
     public void ManageAbility(AbilityType abilityType) {
         Ability ability = (abilityType == AbilityType.FIRST) ? currentPlayer.getFirstAbility() : currentPlayer.getSecondAbility();
 
-        if (!ability.isDrawable()){
 
-            if(ability.getAbilityCooldown() > 0){
-                this.canUseAbility = true;
-                return;
-            }
+        ability.activateAbility(currentPlayer, opponentPlayer, this);
 
-            if (ability.getAbilityDamage() < 0){
-                handleAbilityCooldown(ability);
-                ability.ActivateAbility(currentPlayer, opponentPlayer);
-                handleNerfEffects(ability);// because heal is not drawable but it still should the check the nerfs
-                this.canUseAbility = true;
-                changePlayers();
-
-            }
-
-
-            handleNerfEffects(ability);
-           return; // Do nothing if the ability is not drawable
-        }
-
-        //for soilWall
-        if (ability.getAbilityDamage() == 0){
-            handleAbilityCooldown(ability);
-            System.out.println("SoilWall activated");
-            changePlayers();
-            this.canUseAbility = true;
-        }
-
-
-        this.activeAbilities.add(ability);
-        positionAbility(ability);
-        handleNerfEffects(ability);
 
     }
+
+
 
     public void updateAbilities() {
         for (int i = activeAbilities.size() - 1; i >= 0; i--) {
@@ -79,7 +51,7 @@ public class AbilityManager {
                 handleAbilityCooldown(currentPlayer.getSecondAbility());
                 this.canUseAbility = true;
 
-                ability.ActivateAbility(GameVariables.currentPlayer, GameVariables.opponentPlayer);
+                ability.dealDamage(currentPlayer, opponentPlayer);
                 activeAbilities.remove(i); // Remove ability after impact
                 changePlayers();
             }
@@ -117,7 +89,7 @@ public class AbilityManager {
     }
 
 
-    private void handleNerfEffects(Ability ability) {
+    public void handleNerfEffects(Ability ability) {
         if (currentPlayer.getNerfDuration() > 0) {
             currentPlayer.setNerfDuration(currentPlayer.getNerfDuration() - 1);
             System.out.println("Nerf duration: " + currentPlayer.getNerfDuration());
@@ -137,7 +109,7 @@ public class AbilityManager {
        // if the player is frozen is being checked in the ChangePlayers method
     }
 
-    private void positionAbility(Ability ability) {
+    public void positionAbility(Ability ability) {
         if (currentPlayer == GameVariables.player1) {
             ability.setX(currentPlayer.getX() + currentPlayer.getWidth() - 100);
         } else {
@@ -151,9 +123,39 @@ public class AbilityManager {
         return canUseAbility;
     }
 
+    public void addActiveAbility(Ability ability){
+        this.activeAbilities.add(ability);
+    }
+
     public void setCanUseAbility(boolean canUseAbility) {
         this.canUseAbility = canUseAbility;
     }
 
+    public Character getCurrentPlayer() {
+        return currentPlayer;
+    }
 
+    public void setCurrentPlayer(Character currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public List<Ability> getActiveAbilities() {
+        return activeAbilities;
+    }
+
+    public void setActiveAbilities(List<Ability> activeAbilities) {
+        this.activeAbilities = activeAbilities;
+    }
+
+    public Character getOpponentPlayer() {
+        return opponentPlayer;
+    }
+
+    public void setOpponentPlayer(Character opponentPlayer) {
+        this.opponentPlayer = opponentPlayer;
+    }
+
+    public boolean isCanUseAbility() {
+        return canUseAbility;
+    }
 }

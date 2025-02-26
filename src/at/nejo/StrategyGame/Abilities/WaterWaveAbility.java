@@ -21,21 +21,20 @@ public class WaterWaveAbility extends Ability{
     }
 
     @Override
-    public void ActivateAbility(Character currentPlayer, Character opponentPlayer) {
+    public void activateAbility(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager) {
             if (currentPlayer.isFrozen()){
-                return;
-            }
-            if (this.getAbilityCooldown() > 0){
+                abilityManager.changePlayers();
                 return;
             }
 
-            opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
-
+        abilityManager.addActiveAbility(this);
+        abilityManager.positionAbility(this);
+        abilityManager.handleNerfEffects(this);
     }
 
     @Override
-    public void activate(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager) {
-
+    public void dealDamage(Character currentPlayer, Character opponentPlayer) {
+        opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
     }
 
 

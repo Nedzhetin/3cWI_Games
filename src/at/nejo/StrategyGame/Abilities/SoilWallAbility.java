@@ -24,7 +24,7 @@ public class SoilWallAbility extends Ability{
     }
 
     @Override
-    public void ActivateAbility(Character currentPlayer, Character opponentPlayer) {
+    public void activateAbility(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager) {
         if (currentPlayer.isFrozen()){
             return;
         }
@@ -37,9 +37,10 @@ public class SoilWallAbility extends Ability{
     }
 
     @Override
-    public void activate(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager) {
+    public void dealDamage(Character currentPlayer, Character opponentPlayer) {
 
     }
+
 
     @Override
     public void move() {

@@ -35,14 +35,15 @@ public abstract class Ability  {
 
 
     public abstract void draw();
-    public abstract void ActivateAbility(Character currentPlayer, Character opponentPlayer);
+    public abstract void activateAbility(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager);
+    public abstract void dealDamage(Character currentPlayer, Character opponentPlayer);
 
     public void drawAbility(Image img) {
         this.abilityImg.draw(this.x, this.y);
 
     }
 
-    public abstract void activate(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager);
+
 
 
     public abstract void move();
