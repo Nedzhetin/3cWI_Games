@@ -23,6 +23,7 @@ public class HealAbility extends Ability{
 
         currentPlayer.setHealth(currentPlayer.getHealth() - this.getAbilityDamage());
         setAbilityCooldown(4);
+        abilityManager.changePlayers();
     }
 
     @Override

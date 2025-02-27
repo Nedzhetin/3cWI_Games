@@ -27,6 +27,7 @@ public class WaterWaveAbility extends Ability{
                 return;
             }
 
+        System.out.println("WaterWaveAbility activated");
         abilityManager.addActiveAbility(this);
         abilityManager.positionAbility(this);
         abilityManager.handleNerfEffects(this);

@@ -30,10 +30,7 @@ public class AbilityManager {
 
     public void ManageAbility(AbilityType abilityType) {
         Ability ability = (abilityType == AbilityType.FIRST) ? currentPlayer.getFirstAbility() : currentPlayer.getSecondAbility();
-
-
         ability.activateAbility(currentPlayer, opponentPlayer, this);
-
 
     }
 
@@ -46,11 +43,7 @@ public class AbilityManager {
 
             // Check if it collides with the opponent
             if (GameVariables.isCollidingAbilityCharacter(ability, GameVariables.opponentPlayer)) {
-
-                handleAbilityCooldown(currentPlayer.getFirstAbility());
-                handleAbilityCooldown(currentPlayer.getSecondAbility());
                 this.canUseAbility = true;
-
                 ability.dealDamage(currentPlayer, opponentPlayer);
                 activeAbilities.remove(i); // Remove ability after impact
                 changePlayers();
@@ -72,8 +65,9 @@ public class AbilityManager {
             this.currentPlayer.setFrozen(false);
         }
 
-
-
+        this.canUseAbility = true;
+        handleAbilityCooldown(currentPlayer.getFirstAbility());
+        handleAbilityCooldown(currentPlayer.getSecondAbility());
     }
 
     private void  handleAbilityCooldown(Ability ability) {
@@ -158,4 +152,5 @@ public class AbilityManager {
     public boolean isCanUseAbility() {
         return canUseAbility;
     }
+
 }
