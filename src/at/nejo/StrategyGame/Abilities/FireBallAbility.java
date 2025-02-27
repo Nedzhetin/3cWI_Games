@@ -20,6 +20,7 @@ public class FireBallAbility extends Ability{
     @Override
     public void activateAbility(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager) {
             if (currentPlayer.isFrozen()){
+                abilityManager.handleNerfEffects(this);
                 abilityManager.changePlayers();
                 return;
             }
