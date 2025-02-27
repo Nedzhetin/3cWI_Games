@@ -11,6 +11,7 @@ public class AbilityManager {
     private Character opponentPlayer;
     private List<Ability> activeAbilities;
     private boolean canUseAbility;
+    private SoilWallAbility activeSoilWall;
 
 
     public AbilityManager(Character currentPlayer, Character opponentPlayer) {
@@ -41,12 +42,27 @@ public class AbilityManager {
             Ability ability = activeAbilities.get(i);
             ability.move();
 
+
+            // 🌟 Check if the SoilWall exists and gets hit
+            if (activeSoilWall != null && GameVariables.isCollidingAbilityAbility(ability, activeSoilWall)) {
+                System.out.println("Ability hit!");
+                activeSoilWall.takeDamage(ability.getAbilityDamage());
+                activeAbilities.remove(ability);// Remove projectile
+                this.canUseAbility = true;
+                return; // Stop checking
+            }
+
             // Check if it collides with the opponent
             if (GameVariables.isCollidingAbilityCharacter(ability, GameVariables.opponentPlayer)) {
                 this.canUseAbility = true;
                 ability.dealDamage(currentPlayer, opponentPlayer);
                 activeAbilities.remove(i); // Remove ability after impact
                 changePlayers();
+            }
+
+            if (activeSoilWall != null && activeSoilWall.getHealth() <= 0) {
+                activeSoilWall = null;
+                System.out.println("SoilWall destroyed!");
             }
         }
     }
@@ -152,6 +168,14 @@ public class AbilityManager {
 
     public boolean isCanUseAbility() {
         return canUseAbility;
+    }
+
+    public SoilWallAbility getActiveSoilWall() {
+        return activeSoilWall;
+    }
+
+    public void setActiveSoilWall(SoilWallAbility activeSoilWall) {
+        this.activeSoilWall = activeSoilWall;
     }
 
 }
