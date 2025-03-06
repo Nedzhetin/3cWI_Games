@@ -44,11 +44,12 @@ public class SoilWallAbility extends Ability{
             return;
         }
         if (this.getAbilityCooldown() > 0){
+            abilityManager.setCanUseAbility(true);
             return;
         }
 
-        abilityManager.setActiveSoilWall(this);
         abilityManager.addActiveAbility(this);
+        abilityManager.setActiveSoilWall(this);
         abilityManager.positionAbility(this);
         abilityManager.handleNerfEffects(this);
         abilityManager.setCanUseAbility(true);

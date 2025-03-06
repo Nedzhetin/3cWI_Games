@@ -151,8 +151,6 @@ public class Main extends BasicGame {
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         backgroundImg.draw();
 
-
-
         // Draw all figures
         for (Figures figure : figures) {
             figure.draw(graphics);
@@ -168,8 +166,6 @@ public class Main extends BasicGame {
         }
 
     }
-
-
 
 
     @Override

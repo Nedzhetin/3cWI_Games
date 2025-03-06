@@ -19,6 +19,7 @@ public class HealAbility extends Ability{
             return;
         }
         if (this.getAbilityCooldown() > 0){
+            abilityManager.setCanUseAbility(true);
             return;
         }
 

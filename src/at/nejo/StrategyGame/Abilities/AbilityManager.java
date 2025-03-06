@@ -23,6 +23,7 @@ public class AbilityManager {
 
     public void renderAbilities() {
         for (Ability ability : activeAbilities) {
+
             ability.draw();
         }
 
@@ -43,11 +44,12 @@ public class AbilityManager {
             ability.move();
 
 
-            // 🌟 Check if the SoilWall exists and gets hit
+            // Check if the SoilWall exists and gets hit
             if (activeSoilWall != null && GameVariables.isCollidingAbilityAbility(ability, activeSoilWall)) {
-                System.out.println("Ability hit!");
                 activeSoilWall.takeDamage(ability.getAbilityDamage());
-                activeAbilities.remove(ability);// Remove projectile
+                if (!(ability instanceof SoilWallAbility)) {
+                    activeAbilities.remove(i); // Remove ability after impact
+                }
                 this.canUseAbility = true;
                 return; // Stop checking
             }
@@ -56,15 +58,17 @@ public class AbilityManager {
             if (GameVariables.isCollidingAbilityCharacter(ability, GameVariables.opponentPlayer)) {
                 this.canUseAbility = true;
                 ability.dealDamage(currentPlayer, opponentPlayer);
-                activeAbilities.remove(i); // Remove ability after impact
+                activeAbilities.remove(i);// Remove ability after impact
                 changePlayers();
             }
-
             if (activeSoilWall != null && activeSoilWall.getHealth() <= 0) {
+                activeAbilities.remove(activeSoilWall);
                 activeSoilWall = null;
                 System.out.println("SoilWall destroyed!");
             }
+
         }
+
     }
 
     public void changePlayers() {
@@ -122,11 +126,23 @@ public class AbilityManager {
 
     public void positionAbility(Ability ability) {
         if (currentPlayer == GameVariables.player1) {
-            ability.setX(currentPlayer.getX() + currentPlayer.getWidth() - 100);
+            if (ability instanceof SoilWallAbility){
+                ability.setX(currentPlayer.getX() + currentPlayer.getWidth() - 100);
+                System.out.println("SoilWall created!");
+            }else {
+                ability.setX(currentPlayer.getX() + currentPlayer.getWidth() - 150);
+            }
         } else {
-            ability.setX(currentPlayer.getX() - currentPlayer.getWidth() + 200);
+            if (ability instanceof SoilWallAbility){
+                ability.setX(currentPlayer.getX() - currentPlayer.getWidth() + 200);
+                System.out.println("SoilWall created!");
+            }else {
+                ability.setX(currentPlayer.getX() - currentPlayer.getWidth() + 250);
+
+            }
         }
         ability.setY(currentPlayer.getY() + currentPlayer.getHeight() - 320);
+
 
     }
 

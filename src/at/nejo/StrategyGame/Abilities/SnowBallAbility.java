@@ -22,6 +22,7 @@ public class SnowBallAbility extends Ability{
     @Override
     public void activateAbility(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager) {
                 if (this.getAbilityCooldown() > 0){
+                    abilityManager.setCanUseAbility(true);
                     return;
                 }
 
