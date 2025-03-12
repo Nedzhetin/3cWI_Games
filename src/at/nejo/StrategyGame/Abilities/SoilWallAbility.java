@@ -7,6 +7,7 @@ import org.newdawn.slick.Color;
 public class SoilWallAbility extends Ability{
 
     private int health;
+    private boolean isPositioned;
 
     public SoilWallAbility(int abilityDamage, String imgUrl, boolean drawAbility, int health) {
         super(abilityDamage, imgUrl, drawAbility,0);
@@ -54,6 +55,7 @@ public class SoilWallAbility extends Ability{
         abilityManager.handleNerfEffects(this);
         abilityManager.setCanUseAbility(true);
         abilityManager.changePlayers();
+        this.isPositioned = true;
         this.setAbilityCooldown(3);
     }
 
@@ -66,6 +68,14 @@ public class SoilWallAbility extends Ability{
     @Override
     public void move() {
 
+    }
+
+    public boolean isPositioned() {
+        return isPositioned;
+    }
+
+    public void setPositioned(boolean positioned) {
+        isPositioned = positioned;
     }
 
     public int getHealth() {

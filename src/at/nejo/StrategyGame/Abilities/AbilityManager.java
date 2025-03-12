@@ -37,7 +37,6 @@ public class AbilityManager {
     }
 
 
-
     public void updateAbilities() {
         for (int i = activeAbilities.size() - 1; i >= 0; i--) {
             Ability ability = activeAbilities.get(i);
@@ -48,9 +47,11 @@ public class AbilityManager {
             if (activeSoilWall != null && GameVariables.isCollidingAbilityAbility(ability, activeSoilWall)) {
                 activeSoilWall.takeDamage(ability.getAbilityDamage());
                 if (!(ability instanceof SoilWallAbility)) {
-                    activeAbilities.remove(i); // Remove ability after impact
+                    activeAbilities.remove(i);// Remove ability after impact
+                    changePlayers();
                 }
                 this.canUseAbility = true;
+
                 return; // Stop checking
             }
 
@@ -61,11 +62,7 @@ public class AbilityManager {
                 activeAbilities.remove(i);// Remove ability after impact
                 changePlayers();
             }
-            if (activeSoilWall != null && activeSoilWall.getHealth() <= 0) {
-                activeAbilities.remove(activeSoilWall);
-                activeSoilWall = null;
-                System.out.println("SoilWall destroyed!");
-            }
+
 
         }
 
@@ -89,9 +86,15 @@ public class AbilityManager {
         this.canUseAbility = true;
         handleAbilityCooldown(currentPlayer.getFirstAbility());
         handleAbilityCooldown(currentPlayer.getSecondAbility());
+
+        if (activeSoilWall != null && activeSoilWall.getHealth() <= 0) {
+            activeAbilities.remove(activeSoilWall);
+            activeSoilWall = null;
+            System.out.println("SoilWall destroyed!");
+        }
     }
 
-    private void  handleAbilityCooldown(Ability ability) {
+    private void handleAbilityCooldown(Ability ability) {
         if (ability.getAbilityCooldown() > 0) {
             ability.setAbilityCooldown(ability.getAbilityCooldown() - 1);
 
@@ -120,25 +123,25 @@ public class AbilityManager {
         }
 
 
-
-       // if the player is frozen is being checked in the ChangePlayers method
+        // if the player is frozen is being checked in the ChangePlayers method
     }
 
     public void positionAbility(Ability ability) {
+
         if (currentPlayer == GameVariables.player1) {
-            if (ability instanceof SoilWallAbility){
-                ability.setX(currentPlayer.getX() + currentPlayer.getWidth() - 100);
+            if (ability instanceof SoilWallAbility) {
+                ability.setX(600);
                 System.out.println("SoilWall created!");
-            }else {
+            } else {
+
                 ability.setX(currentPlayer.getX() + currentPlayer.getWidth() - 150);
             }
         } else {
-            if (ability instanceof SoilWallAbility){
-                ability.setX(currentPlayer.getX() - currentPlayer.getWidth() + 200);
+            if (ability instanceof SoilWallAbility) {
+                ability.setX(800);
                 System.out.println("SoilWall created!");
-            }else {
-                ability.setX(currentPlayer.getX() - currentPlayer.getWidth() + 250);
-
+            } else {
+                ability.setX(currentPlayer.getX() - 250);
             }
         }
         ability.setY(currentPlayer.getY() + currentPlayer.getHeight() - 320);
@@ -150,7 +153,7 @@ public class AbilityManager {
         return canUseAbility;
     }
 
-    public void addActiveAbility(Ability ability){
+    public void addActiveAbility(Ability ability) {
         this.activeAbilities.add(ability);
     }
 
