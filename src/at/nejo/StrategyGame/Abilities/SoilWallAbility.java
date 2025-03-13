@@ -18,13 +18,15 @@ public class SoilWallAbility extends Ability{
     public void draw() {
         if (GameVariables.currentPlayer.isFrozen()){
             return;
-        }else{
-            if (GameVariables.currentPlayer == GameVariables.player1){
-                getAbilityImg().draw(getX() + 100,getY()+100);
-            }else{
-                getAbilityImg().draw(getX() -50,getY()+100);
-            }
         }
+
+        if(GameVariables.player1 == GameVariables.earthMan){
+            getAbilityImg().draw(getX() - 100, getY() + 50);
+        }else if(GameVariables.player2 == GameVariables.earthMan){
+            getAbilityImg().draw(getX() + 180, getY() + 50);
+
+        }
+
 
         if (this.health > 60){
             GameVariables.font.drawString(this.getX() + this.getWidth()/2, this.getY() - this.getHeight()/2,  ""+ this.health, Color.green);
@@ -37,25 +39,28 @@ public class SoilWallAbility extends Ability{
 
     }
 
-    @Override
     public void activateAbility(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager) {
-        if (currentPlayer.isFrozen()){
+        if (currentPlayer.isFrozen()) {
             abilityManager.handleNerfEffects(this);
             abilityManager.changePlayers();
             return;
         }
-        if (this.getAbilityCooldown() > 0){
+        if (this.getAbilityCooldown() > 0) {
             abilityManager.setCanUseAbility(true);
             return;
         }
 
-        abilityManager.addActiveAbility(this);
-        abilityManager.setActiveSoilWall(this);
-        abilityManager.positionAbility(this);
+        // Check if it's already active to prevent repositioning
+        if (abilityManager.getActiveSoilWall() == null) {
+            abilityManager.addActiveAbility(this);
+            abilityManager.setActiveSoilWall(this);
+            abilityManager.positionAbility(this);
+            this.isPositioned = true;
+        }
+
         abilityManager.handleNerfEffects(this);
         abilityManager.setCanUseAbility(true);
         abilityManager.changePlayers();
-        this.isPositioned = true;
         this.setAbilityCooldown(3);
     }
 

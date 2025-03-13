@@ -27,11 +27,16 @@ public class AbilityManager {
             ability.draw();
         }
 
-
     }
 
     public void ManageAbility(AbilityType abilityType) {
         Ability ability = (abilityType == AbilityType.FIRST) ? currentPlayer.getFirstAbility() : currentPlayer.getSecondAbility();
+
+        // If SoilWall already exists, don't create a new one or reposition it
+        if (ability instanceof SoilWallAbility && activeSoilWall != null) {
+            System.out.println("SoilWall already active, no repositioning.");
+            return;
+        }
         ability.activateAbility(currentPlayer, opponentPlayer, this);
 
     }
@@ -127,13 +132,11 @@ public class AbilityManager {
     }
 
     public void positionAbility(Ability ability) {
-
         if (currentPlayer == GameVariables.player1) {
             if (ability instanceof SoilWallAbility) {
                 ability.setX(600);
                 System.out.println("SoilWall created!");
             } else {
-
                 ability.setX(currentPlayer.getX() + currentPlayer.getWidth() - 150);
             }
         } else {
@@ -145,8 +148,6 @@ public class AbilityManager {
             }
         }
         ability.setY(currentPlayer.getY() + currentPlayer.getHeight() - 320);
-
-
     }
 
     public boolean canUseAbility() {
