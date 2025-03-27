@@ -10,7 +10,7 @@ public class FireBallAbility extends Ability{
 
     @Override
     public void draw() {
-        if (GameVariables.currentPlayer.isFrozen()){
+        if (GameVariables.currentPlayer.isFrozen()) {
             return;
         }else{
             getAbilityImg().draw(getX(),getY());

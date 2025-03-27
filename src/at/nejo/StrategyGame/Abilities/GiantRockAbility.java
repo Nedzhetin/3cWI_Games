@@ -42,15 +42,15 @@ public class GiantRockAbility extends Ability{
     @Override
     public void move() {
         if (GameVariables.currentPlayer == GameVariables.player1) {
-            setX(getX() + 0.5f);
+            setX(getX() + 0.7f);
         } else {
-            setX(getX() - 0.5f);
+            setX(getX() - 0.7f);
         }
 
 
         if (goingUp) {
             setY(getY() - 0.5f);
-            if (getY() <= 400) {
+            if (getY() <= 200) {
                 goingUp = false;
             }
         } else {

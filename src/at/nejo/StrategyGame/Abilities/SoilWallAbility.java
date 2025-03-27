@@ -21,21 +21,30 @@ public class SoilWallAbility extends Ability{
         }
 
         if(GameVariables.player1 == GameVariables.earthMan){
-            getAbilityImg().draw(getX() - 100, getY() + 50);
+            getAbilityImg().draw(getX() + 50, getY() + 50);
         }else if(GameVariables.player2 == GameVariables.earthMan){
             getAbilityImg().draw(getX() + 180, getY() + 50);
 
         }
 
 
-        if (this.health > 60){
-            GameVariables.font.drawString(this.getX() + this.getWidth()/2, this.getY() - this.getHeight()/2,  ""+ this.health, Color.green);
-        }else if (this.health > 30){
-            GameVariables.font.drawString(this.getX() + this.getWidth()/2, this.getY() - this.getHeight()/2,  ""+ this.health,Color.yellow);
+        if(GameVariables.earthMan == GameVariables.player1) {
+            if (this.health > 30){
+                GameVariables.font.drawString(this.getX() + 150, this.getY(),  ""+ this.health, Color.green);
+            }else if (this.health > 15){
+                GameVariables.font.drawString(this.getX() + 150 , this.getY(),  ""+ this.health,Color.yellow);
+            }else{
+                GameVariables.font.drawString(this.getX() + 150, this.getY(),  ""+ this.health,Color.red);
+            }
         }else{
-            GameVariables.font.drawString(this.getX() + this.getWidth()/2, this.getY() - this.getHeight()/2,  ""+ this.health,Color.red);
+            if (this.health > 30){
+                GameVariables.font.drawString(this.getX() + this.getWidth(), this.getY(),  ""+ this.health, Color.green);
+            }else if (this.health > 15){
+                GameVariables.font.drawString(this.getX() + this.getWidth(), this.getY(),  ""+ this.health,Color.yellow);
+            }else{
+                GameVariables.font.drawString(this.getX() + this.getWidth(), this.getY(),  ""+ this.health,Color.red);
+            }
         }
-
 
     }
 

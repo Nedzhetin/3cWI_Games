@@ -34,6 +34,7 @@ public class AbilityManager {
 
         // If SoilWall already exists, don't create a new one or reposition it
         if (ability instanceof SoilWallAbility && activeSoilWall != null) {
+            this.canUseAbility = true;
             System.out.println("SoilWall already active, no repositioning.");
             return;
         }
@@ -50,6 +51,9 @@ public class AbilityManager {
 
             // Check if the SoilWall exists and gets hit
             if (activeSoilWall != null && GameVariables.isCollidingAbilityAbility(ability, activeSoilWall)) {
+                if(ability instanceof GiantRockAbility){
+                    return;
+                }
                 activeSoilWall.takeDamage(ability.getAbilityDamage());
                 if (!(ability instanceof SoilWallAbility)) {
                     activeAbilities.remove(i);// Remove ability after impact
@@ -94,7 +98,9 @@ public class AbilityManager {
 
         if (activeSoilWall != null && activeSoilWall.getHealth() <= 0) {
             activeAbilities.remove(activeSoilWall);
+            activeSoilWall.setHealth(50);
             activeSoilWall = null;
+
             System.out.println("SoilWall destroyed!");
         }
     }
