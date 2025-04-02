@@ -84,7 +84,7 @@ public class GameVariables {
 
     public static boolean isCollidingAbilityAbility(Ability a, Ability b) {
 
-        return a.getX()  < b.getX() + b.getWidth() &&
+        return a.getX()  < b.getX() + b.getWidth()/2.4 &&
                 a.getX()  > b.getX() &&
                 a.getY() < b.getY() + b.getHeight() &&
                 a.getY() + a.getHeight() > b.getY();

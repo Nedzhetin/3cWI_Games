@@ -5,7 +5,9 @@ import at.nejo.StrategyGame.GameVariables;
 
 public class GiantRockAbility extends Ability{
 
-    private boolean goingUp = true;
+    private float gravity = 0.001f;
+    private float velocityX = 0.48f;
+    private float velocityY = -0.5f;
 
     public GiantRockAbility(int abilityDamage, String imgUrl, boolean isDrawable) {
         super(abilityDamage, imgUrl, isDrawable, 0);
@@ -30,40 +32,31 @@ public class GiantRockAbility extends Ability{
         abilityManager.addActiveAbility(this);
         abilityManager.positionAbility(this);
         abilityManager.handleNerfEffects(this);
-        this.goingUp = true;
+
     }
 
     @Override
     public void dealDamage(Character currentPlayer, Character opponentPlayer) {
         opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
+        this.velocityY = -0.5f;
 
     }
 
     @Override
     public void move() {
-        if (GameVariables.currentPlayer == GameVariables.player1) {
-            setX(getX() + 0.7f);
-        } else {
-            setX(getX() - 0.7f);
-        }
+        // Apply horizontal movement
+        if(GameVariables.currentPlayer == GameVariables.player1){
+            setX(getX() + velocityX);
 
-
-        if (goingUp) {
-            setY(getY() - 0.5f);
-            if (getY() <= 200) {
-                goingUp = false;
-            }
-        } else {
-            setY(getY() + 0.5f);
+        }else{
+            setX(getX() -velocityX);
 
         }
+        // Apply gravity for smooth downward movement
+        velocityY += gravity;
+        setY(getY() + velocityY);
+
+
     }
 
-    public boolean isGoingUp() {
-        return goingUp;
-    }
-
-    public void setGoingUp(boolean goingUp) {
-        this.goingUp = goingUp;
-    }
 }

@@ -2,6 +2,7 @@ package at.nejo.StrategyGame;
 
 import at.nejo.StrategyGame.Abilities.AbilityManager;
 import at.nejo.StrategyGame.Abilities.AbilityType;
+import org.lwjgl.Sys;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.BasicGameState;
@@ -93,6 +94,7 @@ public class GameScene extends BasicGameState {
             }
 
         }
+
    }
 
 }

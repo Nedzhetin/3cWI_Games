@@ -12,9 +12,15 @@ public class FireBallAbility extends Ability{
     public void draw() {
         if (GameVariables.currentPlayer.isFrozen()) {
             return;
-        }else{
-            getAbilityImg().draw(getX(),getY());
         }
+
+        if(GameVariables.currentPlayer == GameVariables.player1) {
+            getAbilityImg().draw(getX(), getY());
+        }
+        else{
+            getAbilityImg().draw(getX() + 100,getY());
+        }
+
     }
 
     @Override
@@ -40,10 +46,10 @@ public class FireBallAbility extends Ability{
     public void move() {
 
             if(GameVariables.currentPlayer == GameVariables.player1){
-                setX(getX() + 1);
+                setX(getX() + 0.75f);
 
             }else{
-                setX(getX() -1);
+                setX(getX() -0.75f);
 
             }
 
