@@ -37,7 +37,7 @@ public class SnowBallAbility extends Ability{
         opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
         opponentPlayer.setFrozen(true);
         opponentPlayer.setNerfDuration(2);
-        this.setAbilityCooldown(3);
+        this.setAbilityCooldown(6);
         this.setDrawable(false);
 
     }
