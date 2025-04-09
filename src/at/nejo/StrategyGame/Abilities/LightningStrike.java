@@ -47,7 +47,7 @@ public class LightningStrike extends Ability{
 
     @Override
     public void move() {
-        setY(getY() + 1.5f);
+        setY(getY() + 3f);
         if(GameVariables.currentPlayer == GameVariables.player1) {
             setX(getX() - 0.07f);
         }else{
