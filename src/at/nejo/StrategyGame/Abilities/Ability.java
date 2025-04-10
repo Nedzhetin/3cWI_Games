@@ -26,13 +26,17 @@ public abstract class Ability  {
         } catch (SlickException e) {
             throw new RuntimeException(e);
         }
-        if(imgUrl == "testdata/lightningStrikeImg.png"){
-            System.out.println("Lightning Strike ability image loaded");
-            this.abilityImg = this.abilityImg.getScaledCopy(500,1000);
-        }else{
-            this.abilityImg = this.abilityImg.getScaledCopy(this.width,this.height);
+            if (imgUrl.equals("testdata/lightningStrikeImg.png")) {
+                this.abilityImg = this.abilityImg.getScaledCopy(500, 1000);
+            }
+            if (imgUrl.equals("testdata/lightningBoltImg.png")) {
+                System.out.println("Lightning Bolt ability image loaded");
+                this.abilityImg = this.abilityImg.getScaledCopy(500, 300);
+            }
 
-        }
+            if (!imgUrl.equals("testdata/lightningStrikeImg.png") && !imgUrl.equals("testdata/lightningBoltImg.png")) {
+                this.abilityImg = this.abilityImg.getScaledCopy(this.width, this.height);
+            }
 
         }
 

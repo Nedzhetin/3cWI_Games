@@ -55,6 +55,9 @@ public class AbilityManager {
                     return;
                 }
                 activeSoilWall.takeDamage(ability.getAbilityDamage());
+                if(ability instanceof SnowBallAbility){
+                    ability.setAbilityCooldown(6);
+                }
                 if (!(ability instanceof SoilWallAbility)) {
                     activeAbilities.remove(i);// Remove ability after impact
                     changePlayers();
@@ -70,6 +73,7 @@ public class AbilityManager {
                 ability.dealDamage(currentPlayer, opponentPlayer);
                 activeAbilities.remove(i);// Remove ability after impact
                 changePlayers();
+                GameVariables.checkGameOver();
             }
 
 
@@ -98,7 +102,7 @@ public class AbilityManager {
 
         if (activeSoilWall != null && activeSoilWall.getHealth() <= 0) {
             activeAbilities.remove(activeSoilWall);
-            activeSoilWall.setHealth(50);
+            activeSoilWall.setHealth(20);
             activeSoilWall = null;
 
             System.out.println("SoilWall destroyed!");

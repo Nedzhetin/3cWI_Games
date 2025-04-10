@@ -70,7 +70,7 @@ public class SoilWallAbility extends Ability{
         abilityManager.handleNerfEffects(this);
         abilityManager.setCanUseAbility(true);
         abilityManager.changePlayers();
-        this.setAbilityCooldown(3);
+        this.setAbilityCooldown(5);
     }
 
     @Override
