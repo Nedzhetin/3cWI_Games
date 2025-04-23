@@ -42,6 +42,10 @@ public class LightningStrike extends Ability{
     @Override
     public void dealDamage(Character currentPlayer, Character opponentPlayer) {
         opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
+        opponentPlayer.setParalyzed(true);
+        opponentPlayer.setNerfDuration(2);
+        this.setDrawable(false);
+
 
     }
 

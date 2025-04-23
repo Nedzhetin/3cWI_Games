@@ -15,6 +15,7 @@ public class Character implements Content {
     public enum TYPE {FIRE,ICE,EARTH,WIND,LIGHTNING,WATER}
     private TYPE type;
     private boolean isFrozen;
+    private boolean isParalyzed;
     private int nerfDuration;
 
     private boolean isBig;
@@ -55,6 +56,9 @@ public class Character implements Content {
 
         if (isFrozen){
             GameVariables.frozenImg.draw(this.x,this.y);
+
+        }else if(isParalyzed) {
+            GameVariables.frozenImg.draw(this.x, this.y);
         }else{
             this.characterImg.draw(this.x, this.y);
 
@@ -103,6 +107,14 @@ public class Character implements Content {
     public void setXY(float x, float y) {
         this.x = x;
         this.y = y;
+    }
+
+    public boolean isParalyzed() {
+        return isParalyzed;
+    }
+
+    public void setParalyzed(boolean paralyzed) {
+        isParalyzed = paralyzed;
     }
 
 

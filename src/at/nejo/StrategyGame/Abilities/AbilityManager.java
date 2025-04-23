@@ -76,7 +76,6 @@ public class AbilityManager {
                 GameVariables.checkGameOver();
             }
 
-
         }
 
     }

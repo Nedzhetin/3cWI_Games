@@ -104,16 +104,5 @@ public class GameVariables {
         }
     }
 
-    public static void resetGame() {
-        player1 = fireMan;
-        player2 = iceMan;
-        currentPlayer = player1;
-        opponentPlayer = player2;
-        contents.clear();
-        contents.add(fireMan);
-        contents.add(iceMan);
-        contents.add(earthMan);
-        contents.add(lightingMan);
-        gameOver = false; // Reset the gameOver flag
-    }
+
 }
