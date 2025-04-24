@@ -93,6 +93,7 @@ public class AbilityManager {
         System.out.println("Nerf duration: " + this.currentPlayer.getNerfDuration());
         if (this.currentPlayer.getNerfDuration() == 0) {
             this.currentPlayer.setFrozen(false);
+            this.currentPlayer.setParalyzed(false);
         }
 
         this.canUseAbility = true;

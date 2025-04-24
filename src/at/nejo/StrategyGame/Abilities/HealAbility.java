@@ -13,7 +13,7 @@ public class HealAbility extends Ability{
 
     @Override
     public void activateAbility(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager) {
-        if (currentPlayer.isFrozen()){
+        if (currentPlayer.isFrozen() || currentPlayer.isParalyzed()){
             abilityManager.handleNerfEffects(this);
             abilityManager.changePlayers();
             return;

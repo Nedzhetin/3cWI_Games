@@ -12,6 +12,7 @@ public class GameVariables {
 
     public static Image backgroundImg;
     public static Image frozenImg;
+    public static Image paralyzedImg;
     public static AngelCodeFont font;
     public static AngelCodeFont font2;
 
@@ -57,6 +58,7 @@ public class GameVariables {
             font = new AngelCodeFont("testdata/hiero.fnt", "testdata/hiero.png");
             font2 = new AngelCodeFont("testdata/demo2.fnt", "testdata/demo2_00.tga");
             frozenImg = new Image("testdata/frozenImg.png");
+            paralyzedImg = new Image("testdata/paralyzedImg.png");
         } catch (SlickException e) {
             throw new RuntimeException(e);
         }

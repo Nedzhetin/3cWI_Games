@@ -4,6 +4,9 @@ import at.nejo.StrategyGame.Character;
 import at.nejo.StrategyGame.GameVariables;
 
 public class LightningStrike extends Ability{
+
+
+
     public LightningStrike(int abilityDamage, String imgUrl, boolean isDrawable, int abilityCooldown) {
         super(abilityDamage, imgUrl, isDrawable, abilityCooldown);
     }
@@ -42,8 +45,13 @@ public class LightningStrike extends Ability{
     @Override
     public void dealDamage(Character currentPlayer, Character opponentPlayer) {
         opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
-        opponentPlayer.setParalyzed(true);
-        opponentPlayer.setNerfDuration(2);
+        if(Math.random() <= 0.3){
+            // 30% chance to paralyze
+            opponentPlayer.setParalyzed(true);
+            opponentPlayer.setNerfDuration(1);
+            System.out.println("Paralyzed");
+        }
+
         this.setDrawable(false);
 
 

@@ -58,7 +58,8 @@ public class Character implements Content {
             GameVariables.frozenImg.draw(this.x,this.y);
 
         }else if(isParalyzed) {
-            GameVariables.frozenImg.draw(this.x, this.y);
+            this.characterImg.draw(this.x, this.y);
+            GameVariables.paralyzedImg.draw(this.x, this.y);
         }else{
             this.characterImg.draw(this.x, this.y);
 
