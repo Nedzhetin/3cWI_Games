@@ -30,7 +30,6 @@ public abstract class Ability  {
                 this.abilityImg = this.abilityImg.getScaledCopy(500, 1000);
             }
             if (imgUrl.equals("testdata/lightningBoltImg.png")) {
-                System.out.println("Lightning Bolt ability image loaded");
                 this.abilityImg = this.abilityImg.getScaledCopy(500, 300);
             }
 

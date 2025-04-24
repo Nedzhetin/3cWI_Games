@@ -23,6 +23,8 @@ public class WaterWaveAbility extends Ability{
     @Override
     public void activateAbility(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager) {
             if (currentPlayer.isFrozen() || currentPlayer.isParalyzed()){
+                abilityManager.setCanUseAbility(true);
+                abilityManager.handleNerfEffects(this);
                 abilityManager.changePlayers();
                 return;
             }

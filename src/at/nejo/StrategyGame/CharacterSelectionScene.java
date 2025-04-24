@@ -1,5 +1,6 @@
 package at.nejo.StrategyGame;
 
+import at.nejo.StrategyGame.Abilities.Ability;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -52,9 +53,9 @@ public class CharacterSelectionScene extends BasicGameState {
         }
 
         if (GameVariables.player1 == null){
-            GameVariables.font.drawString(700,350,"Player 1 choose your Character");
+            GameVariables.largeFont.drawString(650,100,"Player 1 choose your Character",Color.black);
         }else if(GameVariables.player2 == null) {
-            GameVariables.font.drawString(700,350,"Player 2 choose your Character");
+            GameVariables.largeFont.drawString(650,100,"Player 2 choose your Character",Color.black);
         }
     }
 
@@ -84,6 +85,9 @@ public class CharacterSelectionScene extends BasicGameState {
                         GameVariables.player1 = (Character) content;
                         GameVariables.currentPlayer = GameVariables.player1;
                     }else {
+                        if(GameVariables.player1 == content){
+                            return;
+                        }
                         GameVariables.player2 = (Character) content;
                         GameVariables.opponentPlayer = GameVariables.player2;
                         System.out.println(GameVariables.player2.getName());

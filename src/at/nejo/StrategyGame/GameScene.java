@@ -1,5 +1,6 @@
 package at.nejo.StrategyGame;
 
+import at.nejo.StrategyGame.Abilities.Ability;
 import at.nejo.StrategyGame.Abilities.AbilityManager;
 import at.nejo.StrategyGame.Abilities.AbilityType;
 import org.lwjgl.Sys;
@@ -47,7 +48,7 @@ public class GameScene extends BasicGameState {
         GameVariables.player2.drawHealth(graphics);
 
         if (GameVariables.gameOver) {
-            GameVariables.font.drawString(800, 600, GameVariables.player1.getHealth() <= 0 ? "Player 2 wins!" : "Player 1 wins!");
+            GameVariables.largeFont.drawString(800, 600, GameVariables.player1.getHealth() <= 0 ? "Player 2 wins!" : "Player 1 wins!", Color.black);
             return; // Stop further updates
         }
 
@@ -55,9 +56,9 @@ public class GameScene extends BasicGameState {
 
 
         if (GameVariables.currentPlayer == GameVariables.player1) {
-            GameVariables.font.drawString(800,100,"Player 1 turn");
+            GameVariables.largeFont.drawString(800,100,"Player 1 turn",Color.black);
         }else{
-            GameVariables.font.drawString(800,100,"Player 2 turn");
+            GameVariables.largeFont.drawString(800,100,"Player 2 turn",Color.black);
 
         }
 
@@ -112,4 +113,28 @@ public class GameScene extends BasicGameState {
 
    }
 
+
+    @Override
+    public void mouseMoved(int oldx, int oldy, int newx, int newy) {
+        super.mouseMoved(oldx, oldy, newx, newy);
+
+        for (Content content : GameVariables.contents) {
+            if(content instanceof Character) {
+                if(GameVariables.isColliding(oldx,oldy,content)) {
+
+                    System.out.println(((Character) content).getHealth());
+                }
+            }
+        }
+
+        for (Content content : GameVariables.contents) {
+            if (content instanceof Ability) {
+                if (GameVariables.isHoveringMouseAbility(oldx, oldy, (Ability) content)) {
+                    System.out.println("Ability is hovered");
+                }
+            }
+
+        }
+
+    }
 }

@@ -22,8 +22,22 @@ public class Character implements Content {
     private Ability firstAbility;
     private Ability secondAbility;
 
+    private float scaledAbilityImgOnePosX;
+    private float scaledAbilityImgOnePosY;
+    private float sclaedAbilityImgOneWidth;
+    private float sclaedAbilityImgOneHeight;
+
+    private float scaledAbilityImgTwoPosX;
+    private float scaledAbilityImgTwoPosY;
+    private float sclaedAbilityImgTwoWidth;
+    private float sclaedAbilityImgTwoHeight;
+
+
+
     public Image scaledAbilityImgOne;
     public Image scaledAbilityImgTwo;
+
+
 
 
 
@@ -45,6 +59,15 @@ public class Character implements Content {
         this.secondAbility = secondAbility;
         this.isFrozen = false;
         this.nerfDuration = 0;
+
+        this.scaledAbilityImgOnePosX = this.x + 150;
+        this.scaledAbilityImgOnePosY = this.y + 1050;
+        this.sclaedAbilityImgOneWidth = 120;
+        this.sclaedAbilityImgOneHeight = 120;
+        this.scaledAbilityImgTwoPosX = this.x + 300;
+        this.scaledAbilityImgTwoPosY = this.y + 1050;
+        this.sclaedAbilityImgTwoWidth = 120;
+        this.sclaedAbilityImgTwoHeight = 120;
     }
 
     @Override

@@ -4,7 +4,9 @@ import at.nejo.StrategyGame.Abilities.*;
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class GameVariables {
     public static Image paralyzedImg;
     public static AngelCodeFont font;
     public static AngelCodeFont font2;
+    public static TrueTypeFont largeFont;
 
 
     public static Character player1 = null;
@@ -31,8 +34,8 @@ public class GameVariables {
     public static SoilWallAbility soilWallAbility = new SoilWallAbility(0, "testdata/soilWallAbilityImg.png", true, 20);
     public static WaterWaveAbility waterWaveAbility = new WaterWaveAbility(15, "testdata/waterWaveImg.png", true);
     public static GiantRockAbility giantRockAbility = new GiantRockAbility(20, "testdata/giantRockAbilityImg.png", true);
-    public static LightningStrike lightningStrike = new LightningStrike(25, "testdata/lightningStrikeImg.png", true, 0);
-    public static LightningBolt lightningBolt = new LightningBolt(30, "testdata/lightningBoltImg.png", true, 0);
+    public static LightningStrike lightningStrike = new LightningStrike(20, "testdata/lightningStrikeImg.png", true, 0);
+    public static LightningBolt lightningBolt = new LightningBolt(22, "testdata/lightningBoltImg.png", true, 0);
 
 
     public static final Character fireMan = new Character("Pablo", 100, Character.TYPE.FIRE, "testdata/fireCharacterImg.png", 30, 720, fireBallAbility, healAbility);
@@ -59,6 +62,10 @@ public class GameVariables {
             font2 = new AngelCodeFont("testdata/demo2.fnt", "testdata/demo2_00.tga");
             frozenImg = new Image("testdata/frozenImg.png");
             paralyzedImg = new Image("testdata/paralyzedImg.png");
+
+            Font awtFont = new Font("Arial", Font.BOLD, 50); // 48 is the font size
+            largeFont = new TrueTypeFont(awtFont, true);
+
         } catch (SlickException e) {
             throw new RuntimeException(e);
         }
@@ -66,6 +73,14 @@ public class GameVariables {
 
 
     public static boolean isColliding(float x, float y, Content b) {
+
+        return x < b.getX() + b.getWidth() &&
+                x > b.getX() &&
+                y < b.getY() + b.getHeight() &&
+                y > b.getY();
+    }
+
+    public static boolean isHoveringMouseAbility(float x, float y, Ability b) {
 
         return x < b.getX() + b.getWidth() &&
                 x > b.getX() &&

@@ -23,6 +23,7 @@ public class SnowBallAbility extends Ability{
     public void activateAbility(Character currentPlayer, Character opponentPlayer, AbilityManager abilityManager) {
                 if (this.getAbilityCooldown() > 0 || currentPlayer.isParalyzed() || currentPlayer.isFrozen()) {
                     abilityManager.setCanUseAbility(true);
+                    abilityManager.handleNerfEffects(this);
                     abilityManager.changePlayers();
                     return;
                 }

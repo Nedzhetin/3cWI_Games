@@ -90,7 +90,6 @@ public class AbilityManager {
         this.opponentPlayer = GameVariables.opponentPlayer;
 
         // Check if the player is still frozen
-        System.out.println("Nerf duration: " + this.currentPlayer.getNerfDuration());
         if (this.currentPlayer.getNerfDuration() == 0) {
             this.currentPlayer.setFrozen(false);
             this.currentPlayer.setParalyzed(false);
