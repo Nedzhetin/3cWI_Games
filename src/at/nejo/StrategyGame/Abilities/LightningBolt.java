@@ -39,7 +39,14 @@ public class LightningBolt extends Ability{
     @Override
     public void dealDamage(Character currentPlayer, Character opponentPlayer) {
         opponentPlayer.setHealth(opponentPlayer.getHealth() - this.getAbilityDamage());
+        if(Math.random() <= 0.15){
+            // 15% chance to paralyze
+            opponentPlayer.setParalyzed(true);
+            opponentPlayer.setNerfDuration(1);
+            System.out.println("Paralyzed");
+        }
 
+        this.setDrawable(false);
     }
 
     @Override

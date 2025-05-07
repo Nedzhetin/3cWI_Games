@@ -61,11 +61,11 @@ public class Character implements Content {
         this.nerfDuration = 0;
 
         this.scaledAbilityImgOnePosX = this.x + 150;
-        this.scaledAbilityImgOnePosY = this.y + 1050;
+        this.scaledAbilityImgOnePosY =1050;
         this.sclaedAbilityImgOneWidth = 120;
         this.sclaedAbilityImgOneHeight = 120;
         this.scaledAbilityImgTwoPosX = this.x + 300;
-        this.scaledAbilityImgTwoPosY = this.y + 1050;
+        this.scaledAbilityImgTwoPosY =  1050;
         this.sclaedAbilityImgTwoWidth = 120;
         this.sclaedAbilityImgTwoHeight = 120;
     }
