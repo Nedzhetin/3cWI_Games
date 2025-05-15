@@ -5,8 +5,8 @@ public class Phone extends AbstractProduct {
     private String title;
     private int number;
 
-    public Phone(int id, String title, int number) {
-        super(id, title, "A phone", 0.0);
+    public Phone(int id, String title,String description,double price, int number) {
+        super(id, title,description,price);
         this.id = id;
         this.title = title;
         this.number = number;
